@@ -2,12 +2,11 @@
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case 'HOME_PAGE_LOADED':
+    case 'PROFILE_FAVORITES_PAGE_LOADED':
       return {
-        ...state,
-        tags: action.payload[0].tags
+        ...action.payload[0].profile
       };
-    case 'HOME_PAGE_UNLOADED':
+    case 'PROFILE_FAVORITES_PAGE_UNLOADED':
       return {};
   }
 

@@ -1,19 +1,17 @@
-import { applyMiddleware, createStore, combineReducers } from 'redux';
+import { applyMiddleware, createStore } from 'redux';
+// import createLogger from 'redux-logger'
 import { promiseMiddleware, localStorageMiddleware } from './middleware';
-import auth from './reducers/auth';
-import common from './reducers/common';
-import home from './reducers/home';
-import settings from './reducers/settings';
+import reducer from './reducer';
 
-const reducer = combineReducers({
-  auth,
-  common,
-  home,
-  settings
-});
+const getMiddleware = () => {
+  if (process.env.NODE_ENV === 'production') {
+    return applyMiddleware(promiseMiddleware, localStorageMiddleware);
+  } else {
+    // Enable additional logging in non-production environments.
+    return applyMiddleware(promiseMiddleware, localStorageMiddleware)
+  }
+}
 
-const middleware = applyMiddleware(promiseMiddleware, localStorageMiddleware);
-
-const store = createStore(reducer, middleware);
+const store = createStore(reducer, getMiddleware());
 
 export default store;
