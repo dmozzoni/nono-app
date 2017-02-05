@@ -18,7 +18,8 @@ export default (state = {}, action) => {
       return {
         ...state,
         inProgress: null,
-        errors: action.error ? action.payload.errors : null
+        errors: action.error?
+               (action.payload? action.payload.errors: ["Unauthorized"]) : null
       };
     case 'ASYNC_START':
       if (action.subtype === 'ARTICLE_SUBMITTED') {
