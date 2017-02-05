@@ -1,5 +1,3 @@
-'use strict';
-
 import { Profile, mapStateToProps } from './Profile';
 import React from 'react';
 import { Link } from 'react-router';

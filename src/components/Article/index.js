@@ -1,8 +1,6 @@
-'use strict';
-
 import ArticleMeta from './ArticleMeta';
 import CommentContainer from './CommentContainer';
-import { Link } from 'react-router';
+// import { Link } from 'react-router';
 import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';

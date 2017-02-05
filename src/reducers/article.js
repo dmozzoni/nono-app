@@ -1,5 +1,3 @@
-'use strict';
-
 export default (state = {}, action) => {
   switch (action.type) {
     case 'ARTICLE_PAGE_LOADED':
@@ -8,7 +6,6 @@ export default (state = {}, action) => {
         article: action.payload[0].article,
         comments: action.payload[1].comments
       };
-      break;
     case 'ARTICLE_PAGE_UNLOADED':
       return {};
     case 'ADD_COMMENT':
@@ -25,6 +22,7 @@ export default (state = {}, action) => {
         ...state,
         comments: state.comments.filter(comment => comment.id !== commentId)
       };
+    default:
   }
 
   return state;

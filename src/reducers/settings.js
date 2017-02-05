@@ -1,5 +1,3 @@
-'use strict';
-
 export default (state = {}, action) => {
   switch (action.type) {
     case 'SETTINGS_SAVED':
@@ -15,6 +13,7 @@ export default (state = {}, action) => {
         ...state,
         inProgress: true
       };
+    default:
   }
 
   return state;
