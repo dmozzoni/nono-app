@@ -34,51 +34,56 @@ function HeadBlock(props) {
 class Board extends React.Component {
   renderSquare(i) {
     const squares = this.props.squares;
-    return <Square value={squares[i]}
+    return <Square key={i.toString()} value={squares[i]}
                    onClick={(e) => this.props.onClick(e,i)}
                    onContextMenu={(e) => this.props.onContextMenu(e,i)} />;
   }
-  renderHeadRow(i) {
+  renderHeadRow(j,i) {
     // const squares = this.props.squares;
-    return <HeadRow value={i} />;
+    return <HeadRow key={j.toString()} value={i} />;
   }
-    renderHeadCol(i) {
+    renderHeadCol(j,i) {
     // const squares = this.props.squares;
-    return <HeadCol value={i} />;
+    return <HeadCol key={j.toString()} value={i} />;
   }
       renderHeadBlock(i) {
     // const squares = this.props.squares;
     return <HeadBlock value={i} />;
   }
+
+
+
+renderBoardRows() {
+  let wid = this.props.solWidth;
+  let col = this.props.solCol;
+  let row = this.props.solRow;
+  let page = [];
+
+  for(let j =0; j<wid; j++) {
+      page.push(
+          <div key={j.toString()} className="board-row">
+            {this.renderHeadRow(j,row[j])}
+            {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid*j); })}
+          </div>
+        )
+      }
+return page;
+}
+
+
   render() {
     let wid = this.props.solWidth;
-    let col = this.props.solCol
+    let col = this.props.solCol;
+    let row = this.props.solRow;
     return (
       <div>
         <div className="board-row">
           {this.renderHeadBlock(0)}
-          {Array(wid).join().split(',').map((e, i) => { return this.renderHeadCol(col[i]); })}
+          {Array(wid).join().split(',').map((e, i) => { return this.renderHeadCol(i,col[i]); })}
         </div>
-        <div className="board-row">
-          {this.renderHeadRow(0)}
-          {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i); })}
-        </div>
-        <div className="board-row">
-           {this.renderHeadRow(0)}
-           {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid); })}
-        </div>
-        <div className="board-row">
-          {this.renderHeadRow([2,2])}
-          {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid*2); })}
-        </div>
-        <div className="board-row">
-          {this.renderHeadRow(0)}
-          {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid*3); })}
-        </div>
-        <div className="board-row">
-           {this.renderHeadRow(0)}
-           {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid*4); })}
-        </div>
+
+        {this.renderBoardRows()}
+
       </div>
     );
   }
@@ -89,19 +94,20 @@ class Game extends React.Component {
     super();
     this.state = {
       history: [{
-        squares: Array(25).fill(null),
+        squares: Array(36).fill(null),
       }],
       stepNumber: 0,
       xIsNext: true,
-      sol:  [0,0,0,0,0,
-             0,0,0,0,0,
-             1,1,0,1,1,
-             0,0,0,0,0,
-             0,0,0,0,0],
-      solWidth: 5,
-      solHeight: 5,
-      solCol: [1,1,0,1,1],
-      solRow: [0,0,[2,2],0,0]
+      sol:  [0,0,0,0,0,0,
+             0,0,0,0,0,0,
+             1,1,0,1,1,0,
+             0,0,0,0,0,0,
+             0,0,0,0,0,0,
+             0,0,0,0,0,0],
+      solWidth: 6,
+      solHeight: 6,
+      solCol: [1,1,0,1,1,0],
+      solRow: [0,0,[2,2],0,0,0]
     };
   }
   handleClick(e,i) {
@@ -188,9 +194,9 @@ class Game extends React.Component {
     return (
       <div className="game">
         <div>
-          <Board
+          <Board key={'board'}
             squares={current.squares} solWidth={this.state.solWidth}
-            solCol={this.state.solCol}
+            solCol={this.state.solCol} solRow={this.state.solRow}
             onClick={(e,i) => this.handleClick(e,i)}
             onContextMenu={(e,i) => this.handleClick(e,i)}
           />
