@@ -1,3 +1,6 @@
+import React from 'react';
+import '../index.css';
+
 function Square(props) {
   return (
     <button className="square" onClick={(e) => props.onClick(e)}
@@ -20,7 +23,8 @@ function HeadCol(props) {
       {props.value}
     </button>
   );
-}function HeadBlock(props) {
+}
+function HeadBlock(props) {
   return (
     <button className="headBlock" >
     </button>
@@ -47,58 +51,34 @@ class Board extends React.Component {
     return <HeadBlock value={i} />;
   }
   render() {
+    let wid = this.props.solWidth;
+    let col = this.props.solCol
     return (
       <div>
-
         <div className="board-row">
           {this.renderHeadBlock(0)}
-          {this.renderHeadCol(0)}
-          {this.renderHeadCol(1)}
-          {this.renderHeadCol(2)}
-          {this.renderHeadCol(3)}
-          {this.renderHeadCol(4)}
+          {Array(wid).join().split(',').map((e, i) => { return this.renderHeadCol(col[i]); })}
         </div>
-
         <div className="board-row">
           {this.renderHeadRow(0)}
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
+          {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i); })}
         </div>
         <div className="board-row">
            {this.renderHeadRow(0)}
-         {this.renderSquare(5)}
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-          {this.renderSquare(9)}
+           {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid); })}
         </div>
         <div className="board-row">
           {this.renderHeadRow([2,2])}
-          {this.renderSquare(10)}
-           {this.renderSquare(11)}
-          {this.renderSquare(12)}
-          {this.renderSquare(13)}
-          {this.renderSquare(14)}
-      </div>
+          {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid*2); })}
+        </div>
         <div className="board-row">
           {this.renderHeadRow(0)}
-           {this.renderSquare(15)}
-           {this.renderSquare(16)}
-          {this.renderSquare(17)}
-          {this.renderSquare(18)}
-          {this.renderSquare(19)}
-   </div>
+          {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid*3); })}
+        </div>
         <div className="board-row">
            {this.renderHeadRow(0)}
-          {this.renderSquare(20)}
-           {this.renderSquare(21)}
-          {this.renderSquare(22)}
-          {this.renderSquare(23)}
-          {this.renderSquare(24)}
-   </div>
+           {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid*4); })}
+        </div>
       </div>
     );
   }
@@ -118,6 +98,10 @@ class Game extends React.Component {
              1,1,0,1,1,
              0,0,0,0,0,
              0,0,0,0,0],
+      solWidth: 5,
+      solHeight: 5,
+      solCol: [1,1,0,1,1],
+      solRow: [0,0,[2,2],0,0]
     };
   }
   handleClick(e,i) {
@@ -205,7 +189,8 @@ class Game extends React.Component {
       <div className="game">
         <div>
           <Board
-            squares={current.squares}
+            squares={current.squares} solWidth={this.state.solWidth}
+            solCol={this.state.solCol}
             onClick={(e,i) => this.handleClick(e,i)}
             onContextMenu={(e,i) => this.handleClick(e,i)}
           />
@@ -221,10 +206,10 @@ class Game extends React.Component {
 
 // ========================================
 
-ReactDOM.render(
-  <Game />,
-  document.getElementById('container')
-);
+// ReactDOM.render(
+//   <Game />,
+//   document.getElementById('container')
+// );
 
 function calculateWinner(squares, sol) {
 
@@ -244,3 +229,5 @@ function calculateWinner(squares, sol) {
 
   return 'Win';
 }
+
+export default Game

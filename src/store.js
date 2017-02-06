@@ -8,9 +8,9 @@ const getMiddleware = () => {
     return applyMiddleware(promiseMiddleware, localStorageMiddleware);
   } else {
     // Enable additional logging in non-production environments.
-    return applyMiddleware(promiseMiddleware, localStorageMiddleware)
+    return applyMiddleware(promiseMiddleware, localStorageMiddleware);
   }
-}
+};
 
 const store = createStore(reducer, getMiddleware());
 

@@ -1,6 +1,7 @@
 import ArticleList from '../ArticleList';
 import React from 'react';
 import agent from '../../agent';
+import Game from '../Game'
 import { connect } from 'react-redux';
 
 const YourFeedTab = props => {
@@ -65,30 +66,27 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const MainView = props => {
+
+if (props.token) {
   return (
-    <div className="col-md-9">
-      <div className="feed-toggle">
-        <ul className="nav nav-pills outline-active">
-
-          <YourFeedTab
-            token={props.token}
-            tab={props.tab}
-            onTabClick={props.onTabClick} />
-
-          <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
-
-          <TagFilterTab tag={props.tag} />
-
-        </ul>
-      </div>
-
-      <ArticleList
-        articles={props.articles}
-        loading={props.loading}
-        articlesCount={props.articlesCount}
-        currentPage={props.currentPage} />
+    <div className="container">
+          <Game />
     </div>
   );
+} else {
+
+  return (
+    <div className="container">
+
+      <img src="188.jpg" alt="Welcome" width="300" />
+
+    </div>
+  );
+}
+
 };
+
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView);

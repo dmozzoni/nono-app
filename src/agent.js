@@ -14,7 +14,7 @@ const tokenPlugin = req => {
   if (token) {
     req.set('authorization', `Token ${token}`);
   }
-}
+};
 
 const requests = {
   del: url =>
@@ -43,7 +43,7 @@ const Tags = {
 };
 
 const limit = (count, p) => `limit=${count}&offset=${p ? p * count : 0}`;
-const omitSlug = article => Object.assign({}, article, { slug: undefined })
+const omitSlug = article => Object.assign({}, article, { slug: undefined });
 const Articles = {
   all: page =>
     requests.get(`/articles?${limit(10, page)}`),

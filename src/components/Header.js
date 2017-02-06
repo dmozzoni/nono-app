@@ -36,14 +36,14 @@ const LoggedInView = props => {
       <ul className="nav navbar-nav pull-xs-right">
 
         <li className="nav-item">
-          <Link to="" className="nav-link">
+          <Link to="/" className="nav-link">
             Home
           </Link>
         </li>
 
         <li className="nav-item">
           <Link to="editor" className="nav-link">
-            <i className="ion-compose"></i>&nbsp;New Post
+            <i className="ion-compose"></i>&nbsp;New Grid
           </Link>
         </li>
 

@@ -20,10 +20,11 @@ const mapDispatchToProps = dispatch => ({
 class Login extends React.Component {
   constructor() {
     super();
-    this.changeEmail = ev => this.props.onChangeEmail(ev.target.value) ? ev => this.props.onChangeEmail(ev.target.value) : '';
-    this.changePassword = ev => this.props.onChangePassword(ev.target.value) ? this.props.onChangePassword(ev.target.value) : '';
+    this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
+    this.changePassword = ev => this.props.onChangePassword(ev.target.value);
     this.submitForm = (email, password) => ev => {
       ev.preventDefault();
+      // this.props.onSubmit(email, password);
       this.props.onSubmit(email, password);
     };
   }

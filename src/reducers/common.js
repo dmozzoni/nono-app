@@ -1,5 +1,5 @@
 const defaultState = {
-  appName: 'Conduit',
+  appName: 'NonoGrid',
   token: null,
   viewChangeCounter: 0
 };
