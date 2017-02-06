@@ -1,6 +1,8 @@
 import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';
+import GameEdit from './GameEdit'
+
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({
@@ -32,6 +34,7 @@ class Editor extends React.Component {
     this.changeDescription = updateFieldEvent('description');
     this.changeBody = updateFieldEvent('body');
     this.changeTagInput = updateFieldEvent('tagInput');
+    this.changeSol = updateFieldEvent('solution');
 
     this.watchForEnter = ev => {
       if (ev.keyCode === 13) {
@@ -50,7 +53,8 @@ class Editor extends React.Component {
         title: this.props.title,
         description: this.props.description,
         body: this.props.body,
-        tagList: this.props.tagList
+        tagList: this.props.tagList,
+        solution: this.props.sol
       };
 
       const slug = { slug: this.props.articleSlug };
@@ -102,6 +106,11 @@ class Editor extends React.Component {
                       placeholder="Article Title"
                       value={this.props.title}
                       onChange={this.changeTitle} />
+                  </fieldset>
+
+                  <fieldset className="form-group">
+                    <GameEdit
+                      onChange={this.changeSol} />
                   </fieldset>
 
                   <fieldset className="form-group">

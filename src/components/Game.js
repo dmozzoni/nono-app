@@ -40,35 +40,32 @@ class Board extends React.Component {
   }
   renderHeadRow(j,i) {
     // const squares = this.props.squares;
-    return <HeadRow key={j.toString()} value={i} />;
+    return <HeadRow key={j.toString()} value={i.toString()} />;
   }
-    renderHeadCol(j,i) {
+  renderHeadCol(j,i) {
     // const squares = this.props.squares;
-    return <HeadCol key={j.toString()} value={i} />;
+    return <HeadCol key={j.toString()} value={i.toString()} />;
   }
-      renderHeadBlock(i) {
+  renderHeadBlock(i) {
     // const squares = this.props.squares;
     return <HeadBlock value={i} />;
   }
+  renderBoardRows() {
+    let wid = this.props.solWidth;
+    let col = this.props.solCol;
+    let row = this.props.solRow;
+    let page = [];
 
-
-
-renderBoardRows() {
-  let wid = this.props.solWidth;
-  let col = this.props.solCol;
-  let row = this.props.solRow;
-  let page = [];
-
-  for(let j =0; j<wid; j++) {
-      page.push(
-          <div key={j.toString()} className="board-row">
-            {this.renderHeadRow(j,row[j])}
-            {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid*j); })}
-          </div>
-        )
-      }
-return page;
-}
+    for(let j =0; j<wid; j++) {
+        page.push(
+            <div key={j.toString()} className="board-row">
+              {this.renderHeadRow(j,row[j])}
+              {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid*j); })}
+            </div>
+          )
+        }
+    return page;
+  }
 
 
   render() {
@@ -110,20 +107,24 @@ class Game extends React.Component {
       solRow: [0,0,[2,2],0,0,0]
     };
   }
+
+
+
+
   handleClick(e,i) {
     e.preventDefault();
     var history = this.state.history.slice(0, this.state.stepNumber + 1);
     var current = history[history.length - 1];
     const squares = current.squares.slice();
-  //  alert(e.nativeEvent.which);
 
     var vals = [null, "\u2B1B", '\u00b7']; // null, square, dot
 
  // if (calculateWinner(squares) || squares[i]) {
- if (calculateWinner(squares, this.state.sol)) {
-     return;
+    if (calculateWinner(squares, this.state.sol)) {
+      return;
     }
 
+// e.nativeEvent.witch --> Left click === 1, Right click === 3
     if(e.nativeEvent.which === 1) {
       switch (squares[i]) {
     case vals[0]:
@@ -137,7 +138,7 @@ class Game extends React.Component {
           break;
     default:
   }
-    } else {
+} else if (e.nativeEvent.which === 3) {
           switch (squares[i]) {
     case vals[0]:
         squares[i] = vals[2];
@@ -152,8 +153,6 @@ class Game extends React.Component {
   }
   }
 
- //   squares[i] = this.state.xIsNext ? "\u2B1B" : '\u00b7';
-
     this.setState({
       history: history.concat([{
         squares: squares
@@ -162,13 +161,70 @@ class Game extends React.Component {
       xIsNext: !this.state.xIsNext,
     });
   }
+
   jumpTo(step) {
     this.setState({
       stepNumber: step,
-      // xIsNext: (step % 2) ? false : true,
     });
   }
+
+
+
+  calcCols() {
+    let w = this.state.solWidth;
+    let h = this.state.solHeight;
+    let sol = this.state.sol;
+    let a=[];
+    let tmp;
+    let col=[];
+
+    for (let k = 0; k<w; k++) {
+      sol.map((i,j)=>{if (j%w === k) return col.push(i)});
+      tmp = col.join('').split('0').filter((i) => {return i!==''})
+                .map( (i) => { return i.length });
+      if (tmp.length === 0) {
+        a.push(0);
+      } else {
+        a.push(  tmp  );
+      }
+      col = [];
+    }
+    // this.setState({
+    //   solCol: a,
+    // });
+    return a;
+  }
+
+
+  calcRows() {
+     let w = this.state.solWidth;
+     let h = this.state.solHeight;
+     let sol = this.state.sol;
+     let a=[];
+     let tmp;
+
+     for (let k = 0; k<h; k++) {
+       tmp = sol.slice(k*w,(k+1)*w)
+                 .join('').split('0').filter((i) => {return i!==''})
+                 .map( (i) => { return i.length })
+       if (tmp.length === 0) {
+         a.push(0)
+       } else {
+         a.push(  tmp  );
+       }
+     }
+    //  this.setState({
+    //    solRow: a
+    //  });
+    return a;
+   }
+
+
+
   render() {
+    // this.calcRows();
+    // this.calcCols();
+
     const history = this.state.history;
     const current = history[this.state.stepNumber];
 
@@ -179,6 +235,7 @@ class Game extends React.Component {
     } else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : '.');
     }
+
 
     const moves = history.map((step, move) => {
       const desc = move ?
