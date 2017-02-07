@@ -27,17 +27,14 @@ class BoardEdit extends React.Component {
               {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid*j); })}
             </div>
           )
-        }
+    }
     return page;
   }
-
 
   render() {
     return (
       <div>
-
         {this.renderBoardRows()}
-
       </div>
     );
   }
@@ -51,10 +48,10 @@ class GameEdit extends React.Component {
       solWidth: 10,
       solHeight: 10,
     };
+    GameEdit.propTypes = {
+  myFunc: React.PropTypes.func,
+};
   }
-
-
-
 
   handleClick(e,i) {
     e.preventDefault();
@@ -75,6 +72,9 @@ class GameEdit extends React.Component {
     this.setState({
         sol: squares
     });
+
+    this.props.callbackParent(squares);
+
   }
 
   render() {

@@ -1,7 +1,7 @@
 import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';
-import GameEdit from './GameEdit'
+import GameEdit from './GameEdit';
 
 import { connect } from 'react-redux';
 
@@ -12,6 +12,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   onAddTag: () =>
     dispatch({ type: 'ADD_TAG' }),
+  onSolutionUpdate: (sol) =>
+    dispatch({ type: 'SOLUTION_UPDATE', sol }),
   onLoad: payload =>
     dispatch({ type: 'EDITOR_PAGE_LOADED', payload }),
   onRemoveTag: tag =>
@@ -34,7 +36,7 @@ class Editor extends React.Component {
     this.changeDescription = updateFieldEvent('description');
     this.changeBody = updateFieldEvent('body');
     this.changeTagInput = updateFieldEvent('tagInput');
-    this.changeSol = updateFieldEvent('solution');
+    // this.changeSol = updateFieldEvent('solution');
 
     this.watchForEnter = ev => {
       if (ev.keyCode === 13) {
@@ -54,7 +56,9 @@ class Editor extends React.Component {
         description: this.props.description,
         body: this.props.body,
         tagList: this.props.tagList,
-        solution: this.props.sol
+        solution: this.props.solution,
+        solutionWidth: this.props.solutionWidth,
+        solutionHeight: this.props.solutionHeight
       };
 
       const slug = { slug: this.props.articleSlug };
@@ -86,7 +90,10 @@ class Editor extends React.Component {
   componentWillUnmount() {
     this.props.onUnload();
   }
-
+  onChildChanged(newState) {
+    this.setState({ solution: newState });
+    this.props.onSolutionUpdate(newState.map( (i) => { return i ? 1:0 }));
+  }
   render() {
     return (
       <div className="editor-page">
@@ -109,8 +116,7 @@ class Editor extends React.Component {
                   </fieldset>
 
                   <fieldset className="form-group">
-                    <GameEdit
-                      onChange={this.changeSol} />
+                    <GameEdit callbackParent={(newState) => this.onChildChanged(newState) } onChange={this.changeSol} />
                   </fieldset>
 
                   <fieldset className="form-group">

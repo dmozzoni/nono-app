@@ -8,7 +8,10 @@ export default (state = {}, action) => {
         description: action.payload ? action.payload.article.description : '',
         body: action.payload ? action.payload.article.body : '',
         tagInput: '',
-        tagList: action.payload ? action.payload.article.tagList : []
+        tagList: action.payload ? action.payload.article.tagList : [],
+        solution: action.payload ? action.payload.article.solution : [],
+        solutionWidth: 10,
+        solutionHeight: 10
       };
     case 'EDITOR_PAGE_UNLOADED':
       return {};
@@ -35,8 +38,10 @@ export default (state = {}, action) => {
         ...state,
         tagList: state.tagList.filter(tag => tag !== action.tag)
       };
-    case 'UPDATE_FIELD_EDITOR':
-      return { ...state, [action.key]: action.value };
+      case 'UPDATE_FIELD_EDITOR':
+        return { ...state, [action.key]: action.value };
+      case 'SOLUTION_UPDATE':
+        return { ...state, solution: action.sol };
     default:
   }
 
