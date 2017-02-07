@@ -116,9 +116,9 @@ class Editor extends React.Component {
 
                   <fieldset className="form-group">
                     <GameEdit callbackParent={ (newState) => this.onChildChanged(newState) } 
-                              solution={this.props.solution} solWidth={this.props.solWidth}
-                              solHeight={this.props.solHeight}
-                              />
+                              solution={this.props.solution} solutionWidth={this.props.solutionWidth}
+                              solutionHeight={this.props.solutionHeight}
+                              />                  
                   </fieldset>
 
                   <fieldset className="form-group">

@@ -58,27 +58,11 @@ class Article extends React.Component {
           <div className="row article-content">
             <div className="col-xs-12">
 
-
               <Game solution={this.props.article.solution}
                     solutionWidth={this.props.article.solutionWidth}
                     solutionHeight={this.props.article.solutionHeight} />
 
-
               <div dangerouslySetInnerHTML={markup}></div>
-
-              <ul className="tag-list">
-                {
-                  this.props.article.tagList.map(tag => {
-                    return (
-                      <li
-                        className="tag-default tag-pill tag-outline"
-                        key={tag}>
-                        {tag}
-                      </li>
-                    );
-                  })
-                }
-              </ul>
 
             </div>
           </div>

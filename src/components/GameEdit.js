@@ -40,19 +40,43 @@ class BoardEdit extends React.Component {
   }
 }
 
+
+
 class GameEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      // sol: props.solution, //Array(100).fill(null),
-      // solWidth: props.solWidth ? props.solWidth : 10,
-      // solHeight: props.solHeight ? props.solHeight : 10
-      sol: Array(100).fill(null),
-      solWidth:  10,
-      solHeight: 10
+      sol:  Array(100).fill(null),
+      solWidth: 10,
+      solHeight: 10,
     };
   }
 
+resetState(){
+  this.setState({
+    sol:  this.props.solution,
+    solWidth: this.props.solutionWidth,
+    solHeight: this.props.solutionHeight,
+  });
+}
+
+//
+//
+// class GameEdit extends React.Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       // sol: props.solution, //Array(100).fill(null),
+//       // solWidth: props.solWidth ? props.solWidth : 10,
+//       // solHeight: props.solHeight ? props.solHeight : 10
+//       sol: Array(100).fill(null),
+//       solWidth: props.solutionWidth,
+//       solHeight: props.solutionHeight
+//       // solWidth:  10,
+//       // solHeight: 10
+//     };
+//   }
+//
 
   // componentDidMount() {
   //   if (this.props.solution.length !== 0) {
@@ -89,7 +113,7 @@ class GameEdit extends React.Component {
   }
 
   render() {
-
+// this.resetState();
     return (
       <div className="game">
         <div>

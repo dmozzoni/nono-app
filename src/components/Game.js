@@ -254,27 +254,18 @@ class Game extends React.Component {
 
 // ========================================
 
-// ReactDOM.render(
-//   <Game />,
-//   document.getElementById('container')
-// );
-
 function calculateWinner(squares, sol) {
 
   console.log(sol);
   console.log(squares);
 
   for (var i=0; i<sol.length; i++) {
-
     if ((sol[i] === 1 && squares[i] !== '\u2B1B') || (sol[i] === 0 && !(squares[i] === null || squares[i] === '\u00b7'))) {
-
       console.log('mismatch at', i);
       return null;
     }
   }
-
   console.log('Win')
-
   return 'Win';
 }
 
