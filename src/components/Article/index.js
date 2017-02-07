@@ -5,6 +5,7 @@ import React from 'react';
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import marked from 'marked';
+import Game from '../Game'
 
 const mapStateToProps = state => ({
   ...state.article,
@@ -56,6 +57,12 @@ class Article extends React.Component {
 
           <div className="row article-content">
             <div className="col-xs-12">
+
+
+              <Game solution={this.props.article.solution}
+                    solutionWidth={this.props.article.solutionWidth}
+                    solutionHeight={this.props.article.solutionHeight} />
+
 
               <div dangerouslySetInnerHTML={markup}></div>
 

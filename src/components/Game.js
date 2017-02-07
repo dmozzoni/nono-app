@@ -87,26 +87,23 @@ class Board extends React.Component {
 }
 
 class Game extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       history: [{
-        squares: Array(36).fill(null),
+        squares: Array(props.solutionWidth*props.solutionHeight).fill(null),
       }],
       stepNumber: 0,
       xIsNext: true,
-      sol:  [0,0,0,0,0,0,
-             0,0,0,0,0,0,
-             1,1,0,1,1,0,
-             0,0,0,0,0,0,
-             0,0,0,0,0,0,
-             0,0,0,0,0,0],
-      solWidth: 6,
-      solHeight: 6,
-      solCol: [1,1,0,1,1,0],
-      solRow: [0,0,[2,2],0,0,0]
+      sol:  props.solution,
+      solWidth: props.solutionWidth,
+      solHeight: props.solutionHeight,
+      solCol: this.calcCols(props.solutionWidth,props.solutionHeight,props.solution),
+      solRow: this.calcRows(props.solutionWidth,props.solutionHeight,props.solution)
+      // solRow: [1,1,0,1,1,0,0,0,0,0]
     };
   }
+
 
 
 
@@ -170,10 +167,7 @@ class Game extends React.Component {
 
 
 
-  calcCols() {
-    let w = this.state.solWidth;
-    let h = this.state.solHeight;
-    let sol = this.state.sol;
+  calcCols(w,h,sol) {
     let a=[];
     let tmp;
     let col=[];
@@ -189,17 +183,11 @@ class Game extends React.Component {
       }
       col = [];
     }
-    // this.setState({
-    //   solCol: a,
-    // });
     return a;
   }
 
 
-  calcRows() {
-     let w = this.state.solWidth;
-     let h = this.state.solHeight;
-     let sol = this.state.sol;
+  calcRows(w,h,sol) {
      let a=[];
      let tmp;
 
@@ -213,9 +201,6 @@ class Game extends React.Component {
          a.push(  tmp  );
        }
      }
-    //  this.setState({
-    //    solRow: a
-    //  });
     return a;
    }
 

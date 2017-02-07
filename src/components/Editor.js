@@ -36,7 +36,6 @@ class Editor extends React.Component {
     this.changeDescription = updateFieldEvent('description');
     this.changeBody = updateFieldEvent('body');
     this.changeTagInput = updateFieldEvent('tagInput');
-    // this.changeSol = updateFieldEvent('solution');
 
     this.watchForEnter = ev => {
       if (ev.keyCode === 13) {
@@ -91,7 +90,7 @@ class Editor extends React.Component {
     this.props.onUnload();
   }
   onChildChanged(newState) {
-    this.setState({ solution: newState });
+    // this.setState({ solution: newState });
     this.props.onSolutionUpdate(newState.map( (i) => { return i ? 1:0 }));
   }
   render() {
@@ -116,7 +115,10 @@ class Editor extends React.Component {
                   </fieldset>
 
                   <fieldset className="form-group">
-                    <GameEdit callbackParent={(newState) => this.onChildChanged(newState) } onChange={this.changeSol} />
+                    <GameEdit callbackParent={ (newState) => this.onChildChanged(newState) } 
+                              solution={this.props.solution} solWidth={this.props.solWidth}
+                              solHeight={this.props.solHeight}
+                              />
                   </fieldset>
 
                   <fieldset className="form-group">

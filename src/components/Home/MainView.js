@@ -69,9 +69,28 @@ const MainView = props => {
 
 if (props.token) {
   return (
-    <div className="container">
-          <Game />
-    </div>
+    <div className="col-md-9">
+        <div className="feed-toggle">
+          <ul className="nav nav-pills outline-active">
+
+            <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
+
+            <YourFeedTab
+              token={props.token}
+              tab={props.tab}
+              onTabClick={props.onTabClick} />
+
+            <TagFilterTab tag={props.tag} />
+
+          </ul>
+        </div>
+
+        <ArticleList
+          articles={props.articles}
+          loading={props.loading}
+          articlesCount={props.articlesCount}
+          currentPage={props.currentPage} />
+      </div>
   );
 } else {
 
@@ -85,6 +104,14 @@ if (props.token) {
 }
 
 };
+
+
+
+
+
+
+
+
 
 
 
