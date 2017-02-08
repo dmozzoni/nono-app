@@ -36,10 +36,10 @@ class Article extends React.Component {
       return null;
     }
 
-    const markup = { __html: marked(this.props.article.body, { sanitize: true }) };
     const canModify = this.props.currentUser &&
       this.props.currentUser.username === this.props.article.author.username;
     return (
+
       <div className="article-page">
 
         <div className="banner">
@@ -54,23 +54,18 @@ class Article extends React.Component {
         </div>
 
         <div className="container page">
+          <hr />
 
-          <div className="row article-content">
-            <div className="col-xs-12">
+          <div className="row">
 
+            <div className="container">
               <Game solution={this.props.article.solution}
                     solutionWidth={this.props.article.solutionWidth}
                     solutionHeight={this.props.article.solutionHeight} />
-
-              <div dangerouslySetInnerHTML={markup}></div>
-
             </div>
-          </div>
 
+          </div>
           <hr />
-
-          <div className="article-actions">
-          </div>
 
           <div className="row">
             <CommentContainer
@@ -79,8 +74,9 @@ class Article extends React.Component {
               slug={this.props.params.id}
               currentUser={this.props.currentUser} />
           </div>
-        </div>
       </div>
+    </div>
+
     );
   }
 }

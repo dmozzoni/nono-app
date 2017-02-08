@@ -5,9 +5,28 @@ body {
 }
 
 
+.panscroll {
+  min-height: 345px;
+  max-height: 345px;
+  overflow-y: scroll;
+  /*border: 2px solid black;*/
+  margin-left: 20px;
+}
 
+.panscrollheader {
+  text-align: center;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
 
+.list-group-item {
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
 
+.alert {
+  text-align: center;
+}
 
 body {
   font: 14px "Century Gothic", Futura, sans-serif;

@@ -4,7 +4,9 @@ import '../index.css';
 function Square(props) {
   return (
     <button className="square" onClick={(e) => props.onClick(e)}
-                               onContextMenu={(e) =>props.onContextMenu(e)} >
+                               onContextMenu={(e) =>props.onContextMenu(e)}
+                               onDragEnter={(e) =>props.onDragEnter(e)}
+                               >
       {props.value}
     </button>
   );
@@ -36,7 +38,9 @@ class Board extends React.Component {
     const squares = this.props.squares;
     return <Square key={i.toString()} value={squares[i]}
                    onClick={(e) => this.props.onClick(e,i)}
-                   onContextMenu={(e) => this.props.onContextMenu(e,i)} />;
+                   onContextMenu={(e) => this.props.onContextMenu(e,i)}
+                   onDragEnter={(e) => this.props.onDragEnter(e,i)}
+                   />;
   }
   renderHeadRow(j,i) {
     // const squares = this.props.squares;
@@ -204,23 +208,24 @@ class Game extends React.Component {
     return a;
    }
 
+   showalertbox(status) {
+     return (<div className="alert alert-success" role="alert">{status}</div>);
+    }
 
 
   render() {
-    // this.calcRows();
-    // this.calcCols();
 
     const history = this.state.history;
     const current = history[this.state.stepNumber];
 
     const winner = calculateWinner(current.squares, this.state.sol);
-    let status;
-    if (winner) {
-      status = 'Winner: ' + winner;
-    } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : '.');
-    }
 
+    let status;
+    let showalert;
+    if (winner) {
+      status = 'Congratulations! You solved this nonoGrid!';
+      showalert = this.showalertbox(status);
+    }
 
     const moves = history.map((step, move) => {
       const desc = move ?
@@ -228,12 +233,15 @@ class Game extends React.Component {
         'Game start';
       return (
         <li key={move}>
-          <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
+          <a className="list-group-item" onClick={() => this.jumpTo(move)}>{desc}</a>
         </li>
       );
     });
 
     return (
+      <div className="container">
+        {showalert}
+        <div className="row">
       <div className="game">
         <div>
           <Board key={'board'}
@@ -241,13 +249,19 @@ class Game extends React.Component {
             solCol={this.state.solCol} solRow={this.state.solRow}
             onClick={(e,i) => this.handleClick(e,i)}
             onContextMenu={(e,i) => this.handleClick(e,i)}
+            onDragEnter={(e,i) => this.handleClick(e,i)}
+
           />
         </div>
-        <div className="game-info">
-          <div>{status}</div>
-          <ol>{moves}</ol>
+        <div className="panel panel-primary">
+          <div className="panel-heading panscrollheader">Undo List</div>
+          <div className="panel-body panscroll">
+            <ol>{moves.reverse()}</ol>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
     );
   }
 }
@@ -256,16 +270,16 @@ class Game extends React.Component {
 
 function calculateWinner(squares, sol) {
 
-  console.log(sol);
-  console.log(squares);
+  // console.log(sol);
+  // console.log(squares);
 
   for (var i=0; i<sol.length; i++) {
     if ((sol[i] === 1 && squares[i] !== '\u2B1B') || (sol[i] === 0 && !(squares[i] === null || squares[i] === '\u00b7'))) {
-      console.log('mismatch at', i);
+      // console.log('mismatch at', i);
       return null;
     }
   }
-  console.log('Win')
+  // console.log('Win');
   return 'Win';
 }
 

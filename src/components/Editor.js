@@ -90,26 +90,27 @@ class Editor extends React.Component {
     this.props.onUnload();
   }
   onChildChanged(newState) {
-    // this.setState({ solution: newState });
     this.props.onSolutionUpdate(newState.map( (i) => { return i ? 1:0 }));
   }
+
   render() {
     return (
       <div className="editor-page">
         <div className="container page">
+
+          <hr />
           <div className="row">
-            <div className="col-md-10 offset-md-1 col-xs-12">
 
               <ListErrors errors={this.props.errors}></ListErrors>
 
-              <form>
+              <form className="container">
                 <fieldset>
 
                   <fieldset className="form-group">
                     <input
                       className="form-control form-control-lg"
                       type="text"
-                      placeholder="Article Title"
+                      placeholder="nonoGrid Title"
                       value={this.props.title}
                       onChange={this.changeTitle} />
                   </fieldset>
@@ -118,66 +119,32 @@ class Editor extends React.Component {
                     <GameEdit callbackParent={ (newState) => this.onChildChanged(newState) } 
                               solution={this.props.solution} solutionWidth={this.props.solutionWidth}
                               solutionHeight={this.props.solutionHeight}
-                              />                  
+                              />
                   </fieldset>
 
                   <fieldset className="form-group">
                     <input
                       className="form-control"
                       type="text"
-                      placeholder="What's this article about?"
+                      placeholder="Breifly describe your nonoGrid?"
                       value={this.props.description}
                       onChange={this.changeDescription} />
                   </fieldset>
 
-                  <fieldset className="form-group">
-                    <textarea
-                      className="form-control"
-                      rows="8"
-                      placeholder="Write your article (in markdown)"
-                      value={this.props.body}
-                      onChange={this.changeBody}>
-                    </textarea>
-                  </fieldset>
-
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control"
-                      type="text"
-                      placeholder="Enter tags"
-                      value={this.props.tagInput}
-                      onChange={this.changeTagInput}
-                      onKeyUp={this.watchForEnter} />
-
-                    <div className="tag-list">
-                      {
-                        (this.props.tagList || []).map(tag => {
-                          return (
-                            <span className="tag-default tag-pill" key={tag}>
-                              <i  className="ion-close-round"
-                                  onClick={this.removeTagHandler(tag)}>
-                              </i>
-                              {tag}
-                            </span>
-                          );
-                        })
-                      }
-                    </div>
-                  </fieldset>
-
                   <button
-                    className="btn btn-lg pull-xs-right btn-primary"
+                    className="btn btn-block btn-lgbtn-primary"
                     type="button"
                     disabled={this.props.inProgress}
                     onClick={this.submitForm}>
-                    Publish Article
+                    Submit Your nonoGrid Design
                   </button>
 
                 </fieldset>
               </form>
 
-            </div>
           </div>
+          <hr />
+
         </div>
       </div>
     );

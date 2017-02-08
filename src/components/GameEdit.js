@@ -116,10 +116,30 @@ resetState(){
 
   }
 
+  restoregrid() {
+    this.setState({ sol: this.props.solution });
+  }
+
   render() {
+
+
+
+
 // this.resetState();
     return (
       <div className="game">
+
+
+        <button
+          className="btn btn-block btn-lgbtn-primary"
+          type="button"
+          disabled={this.props.inProgress}
+          onClick={() => this.restoregrid}>
+          Restore Grid
+        </button>
+
+
+
         <div>
           <BoardEdit key={'boardedit'}
             squares={this.state.sol}

@@ -69,21 +69,10 @@ const MainView = props => {
 
 if (props.token) {
   return (
-    <div className="col-md-9">
-        <div className="feed-toggle">
+    <div className="container col-md-10">
           <ul className="nav nav-pills outline-active">
-
             <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
-
-            <YourFeedTab
-              token={props.token}
-              tab={props.tab}
-              onTabClick={props.onTabClick} />
-
-            <TagFilterTab tag={props.tag} />
-
           </ul>
-        </div>
 
         <ArticleList
           articles={props.articles}
@@ -104,16 +93,6 @@ if (props.token) {
 }
 
 };
-
-
-
-
-
-
-
-
-
-
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView);
