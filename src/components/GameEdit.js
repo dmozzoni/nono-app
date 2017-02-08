@@ -3,10 +3,12 @@ import '../index.css';
 
 function Square(props) {
   return (
-    <button className="square" onClick={(e) => props.onClick(e)}
-                               onContextMenu={(e) =>props.onContextMenu(e)} >
+    <div className="square" onClick={(e) => props.onClick(e)}
+                               onContextMenu={(e) =>props.onContextMenu(e)}
+                               onDragEnter={(e) =>props.onDragEnter(e)}
+ >
       {props.value}
-    </button>
+    </div>
   );
 }
 
@@ -15,7 +17,9 @@ class BoardEdit extends React.Component {
     const squares = this.props.squares;
     return <Square key={i.toString()} value={squares[i]}
                    onClick={(e) => this.props.onClick(e,i)}
-                   onContextMenu={(e) => this.props.onContextMenu(e,i)} />;
+                   onContextMenu={(e) => this.props.onContextMenu(e,i)}
+                   onDragEnter={(e) => this.props.onDragEnter(e,i)}
+ />;
   }
   renderBoardRows() {
     let wid = this.props.solWidth;
@@ -122,6 +126,7 @@ resetState(){
             solWidth={this.state.solWidth} solHeight={this.state.solHeight}
             onClick={(e,i) => this.handleClick(e,i)}
             onContextMenu={(e,i) => this.handleClick(e,i)}
+            onDragEnter={(e,i) => this.handleClick(e,i)}
           />
         </div>
       </div>
