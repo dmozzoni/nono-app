@@ -94,6 +94,15 @@ class Editor extends React.Component {
   }
 
   render() {
+
+    let editGrid;
+    if (this.props.location.pathname === '/editor') {
+      editGrid = 'new';
+    } else {
+      editGrid = 'edit';
+    }
+
+
     return (
       <div className="editor-page">
         <div className="container page">
@@ -118,7 +127,7 @@ class Editor extends React.Component {
                   <fieldset className="form-group">
                     <GameEdit callbackParent={ (newState) => this.onChildChanged(newState) } 
                               solution={this.props.solution} solutionWidth={this.props.solutionWidth}
-                              solutionHeight={this.props.solutionHeight}
+                              solutionHeight={this.props.solutionHeight} editGrid={editGrid}
                               />
                   </fieldset>
 

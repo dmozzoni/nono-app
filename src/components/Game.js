@@ -1,16 +1,30 @@
 import React from 'react';
 import '../index.css';
 
+// function Square(props) {
+//   return (
+//     <button className="square" onClick={(e) => props.onClick(e)}
+//                                onContextMenu={(e) =>props.onContextMenu(e)}
+//                                onDragEnter={(e) =>props.onDragEnter(e)}
+//                                >
+//       {props.value}
+//     </button>
+//   );
+// }
+
 function Square(props) {
   return (
-    <button className="square" onClick={(e) => props.onClick(e)}
+    <div className="square"    onMouseDown={(e) => props.onMouseDown(e)}
+                               onMouseUp={(e) => props.onMouseUp(e)}
                                onContextMenu={(e) =>props.onContextMenu(e)}
-                               onDragEnter={(e) =>props.onDragEnter(e)}
-                               >
+                               onMouseEnter={(e) =>props.onMouseEnter(e)}
+    >
       {props.value}
-    </button>
+    </div>
   );
 }
+
+
 
 function HeadRow(props) {
   return (
@@ -36,11 +50,12 @@ function HeadBlock(props) {
 class Board extends React.Component {
   renderSquare(i) {
     const squares = this.props.squares;
-    return <Square key={i.toString()} value={squares[i]}
-                   onClick={(e) => this.props.onClick(e,i)}
-                   onContextMenu={(e) => this.props.onContextMenu(e,i)}
-                   onDragEnter={(e) => this.props.onDragEnter(e,i)}
-                   />;
+         return <Square key={i.toString()} value={squares[i]}
+                        onMouseDown={(e) => this.props.onMouseDown(e,i)}
+                        onMouseUp={(e) => this.props.onMouseUp(e)}
+                        onContextMenu={(e) => this.props.onContextMenu(e,i)}
+                        onMouseEnter={(e) => this.props.onMouseEnter(e,i)}
+      />
   }
   renderHeadRow(j,i) {
     // const squares = this.props.squares;
@@ -109,10 +124,31 @@ class Game extends React.Component {
   }
 
 
+  handleMouseEnter(e,i) {
+    e.preventDefault();
+    if(this.state.test) {
+      // console.log('enter and down');
+      this.handleMouseDown(e,i);
+    }else{
+      // console.log('enter');
+    }
+  }
+  handleMouseUp(e,i) {
+    e.preventDefault();
+    this.setState({
+        test: false
+    });
+    // console.log('mouse up');
+  }
+
+  handleRightClick(e,i) {
+    e.preventDefault();
+    // console.log('mouse right');
+  }
 
 
 
-  handleClick(e,i) {
+  handleMouseDown(e,i) {
     e.preventDefault();
     var history = this.state.history.slice(0, this.state.stepNumber + 1);
     var current = history[history.length - 1];
@@ -160,6 +196,7 @@ class Game extends React.Component {
       }]),
       stepNumber: history.length,
       xIsNext: !this.state.xIsNext,
+      test: true
     });
   }
 
@@ -244,14 +281,16 @@ class Game extends React.Component {
         <div className="row">
       <div className="game">
         <div>
+
           <Board key={'board'}
             squares={current.squares} solWidth={this.state.solWidth}
             solCol={this.state.solCol} solRow={this.state.solRow}
-            onClick={(e,i) => this.handleClick(e,i)}
-            onContextMenu={(e,i) => this.handleClick(e,i)}
-            onDragEnter={(e,i) => this.handleClick(e,i)}
-
+            onMouseDown={(e,i) => this.handleMouseDown(e,i)}
+            onMouseUp={(e,i) => this.handleMouseUp(e,i)}
+            onContextMenu={(e,i) => this.handleRightClick(e,i)}
+            onMouseEnter={(e,i) => this.handleMouseEnter(e,i)}
           />
+
         </div>
         <div className="panel panel-primary">
           <div className="panel-heading panscrollheader">Undo List</div>

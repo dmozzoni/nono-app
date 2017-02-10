@@ -3,10 +3,11 @@ import '../index.css';
 
 function Square(props) {
   return (
-    <div className="square" onClick={(e) => props.onClick(e)}
+    <div className="square"    onMouseDown={(e) => props.onMouseDown(e)}
+                               onMouseUp={(e) => props.onMouseUp(e)}
                                onContextMenu={(e) =>props.onContextMenu(e)}
-                               onDragEnter={(e) =>props.onDragEnter(e)}
- >
+                               onMouseEnter={(e) =>props.onMouseEnter(e)}
+    >
       {props.value}
     </div>
   );
@@ -16,10 +17,11 @@ class BoardEdit extends React.Component {
   renderSquare(i) {
     const squares = this.props.squares;
     return <Square key={i.toString()} value={squares[i]}
-                   onClick={(e) => this.props.onClick(e,i)}
+                   onMouseDown={(e) => this.props.onMouseDown(e,i)}
+                   onMouseUp={(e) => this.props.onMouseUp(e)}
                    onContextMenu={(e) => this.props.onContextMenu(e,i)}
-                   onDragEnter={(e) => this.props.onDragEnter(e,i)}
- />;
+                   onMouseEnter={(e) => this.props.onMouseEnter(e,i)}
+ />
   }
   renderBoardRows() {
     let wid = this.props.solWidth;
@@ -53,16 +55,10 @@ class GameEdit extends React.Component {
       sol:  Array(100).fill(null),
       solWidth: 10,
       solHeight: 10,
+      editGridSet: true
     };
   }
 
-resetState(){
-  this.setState({
-    sol:  this.props.solution,
-    solWidth: this.props.solutionWidth,
-    solHeight: this.props.solutionHeight,
-  });
-}
 
 //
 //
@@ -92,8 +88,10 @@ resetState(){
 
 
 
-  handleClick(e,i) {
+  handleMouseDown(e,i) {
     e.preventDefault();
+    // console.log(e);
+    // if (e.nativeEvent.which === 3) return;
     const squares = this.state.sol.slice();
 
     var vals = [null, "\u2B1B"]; // null, square, dot
@@ -109,44 +107,84 @@ resetState(){
     }
 
     this.setState({
-        sol: squares
+        sol: squares,
+        test: true
     });
-
     this.props.callbackParent(squares);
-
+    // console.log('mouse down with', e.nativeEvent.which);
   }
 
-  restoregrid() {
-    this.setState({ sol: this.props.solution });
+
+  handleMouseEnter(e,i) {
+    e.preventDefault();
+    if(this.state.test) {
+      // console.log('enter and down');
+      this.handleMouseDown(e,i);
+    }else{
+      // console.log('enter');
+    }
   }
+  handleMouseUp(e,i) {
+    e.preventDefault();
+    this.setState({
+        test: false
+    });
+    // console.log('mouse up');
+  }
+
+  handleRightClick(e,i) {
+    e.preventDefault();
+    // console.log('mouse right');
+  }
+
+
+
+  // componentWillReceiveProps(nextProps) {
+  //   alert('willrecieve' + ' ' + this.state.editGridSet + ' ' + nextProps.editGrid)
+  //   if (nextProps.editGrid === 'edit' && this.state.editGridSet) {
+  //     this.setState({
+  //       sol:  nextProps.solution,
+  //       solWidth: nextProps.solutionWidth,
+  //       solHeight: nextProps.solutionHeight,
+  //       editGridSet: false
+  //     });
+  //   }
+  // }
+
+
+// componentDidMount() {
+//   alert('didmount' + ' ' + this.state.editGridSet + ' ' + this.props.editGrid)
+//   if (this.props.editGrid === 'edit' && this.state.editGridSet) {
+//     this.setState({
+//       sol:  this.props.solution,
+//       solWidth: this.props.solutionWidth,
+//       solHeight: this.props.solutionHeight,
+//       editGridSet: false
+//     });
+//   }
+// }
+//
+//
+//   componentWillUnmount() {
+//     alert('unmount');
+//     this.setState({
+//       editGridSet: true
+//     });  }
+
 
   render() {
-
-
-
 
 // this.resetState();
     return (
       <div className="game">
-
-
-        <button
-          className="btn btn-block btn-lgbtn-primary"
-          type="button"
-          disabled={this.props.inProgress}
-          onClick={() => this.restoregrid}>
-          Restore Grid
-        </button>
-
-
-
         <div>
           <BoardEdit key={'boardedit'}
             squares={this.state.sol}
             solWidth={this.state.solWidth} solHeight={this.state.solHeight}
-            onClick={(e,i) => this.handleClick(e,i)}
-            onContextMenu={(e,i) => this.handleClick(e,i)}
-            onDragEnter={(e,i) => this.handleClick(e,i)}
+            onMouseDown={(e,i) => this.handleMouseDown(e,i)}
+            onMouseUp={(e,i) => this.handleMouseUp(e,i)}
+            onContextMenu={(e,i) => this.handleRightClick(e,i)}
+            onMouseEnter={(e,i) => this.handleMouseEnter(e,i)}
           />
         </div>
       </div>
