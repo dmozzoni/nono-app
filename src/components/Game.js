@@ -18,14 +18,14 @@ function Square(props) {
 function HeadRow(props) {
   return (
     <button className="headRow" >
-      {props.value}
+      {props.value.replace(/,/g,' ')}
     </button>
   );
 }
 function HeadCol(props) {
   return (
     <button className="headCol" >
-      {props.value}
+      <p className='rottxt'>{props.value.replace(/,/g,' ')}</p>
     </button>
   );
 }
@@ -52,6 +52,9 @@ class Board extends React.Component {
   }
   renderHeadCol(j,i) {
     // const squares = this.props.squares;
+    console.log(i);
+    // if (i.length > 1) console.log(i.split(',').join(' '));
+
     return <HeadCol key={j.toString()} value={i.toString()} />;
   }
   renderHeadBlock(i) {
