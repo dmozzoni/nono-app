@@ -1,17 +1,6 @@
 import React from 'react';
 import '../index.css';
 
-// function Square(props) {
-//   return (
-//     <button className="square" onClick={(e) => props.onClick(e)}
-//                                onContextMenu={(e) =>props.onContextMenu(e)}
-//                                onDragEnter={(e) =>props.onDragEnter(e)}
-//                                >
-//       {props.value}
-//     </button>
-//   );
-// }
-
 function Square(props) {
   return (
     <div className="square"    onMouseDown={(e) => props.onMouseDown(e)}
@@ -203,6 +192,7 @@ class Game extends React.Component {
   jumpTo(step) {
     this.setState({
       stepNumber: step,
+      test: false
     });
   }
 

@@ -60,12 +60,17 @@ const mapDispatchToProps = dispatch => ({
     type: 'FOLLOW_USER',
     payload: agent.Profile.follow(username)
   }),
+  // onLoad: payload => dispatch({ type: 'PROFILE_PAGE_LOADED', payload }),
   onLoad: payload => dispatch({ type: 'PROFILE_PAGE_LOADED', payload }),
   onUnfollow: username => dispatch({
     type: 'UNFOLLOW_USER',
     payload: agent.Profile.unfollow(username)
   }),
-  onUnload: () => dispatch({ type: 'PROFILE_PAGE_UNLOADED' })
+
+// I have no idea why this solved the tab switching problem of losing the profile object
+// as they do the exact same thing and both dispatches should exist
+  // onUnload: () => dispatch({ type: 'PROFILE_PAGE_UNLOADED' })
+  onUnload: () => dispatch({ type: 'PROFILE_FAVORITES_PAGE_UNLOADED' })
 });
 
 class Profile extends React.Component {
