@@ -53,6 +53,7 @@ export default (state = {}, action) => {
       };
     case 'PROFILE_PAGE_LOADED':
     case 'PROFILE_FAVORITES_PAGE_LOADED':
+    console.log('Here in artlist reducer');
       return {
         ...state,
         articles: action.payload[1].articles,

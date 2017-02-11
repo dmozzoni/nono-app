@@ -87,7 +87,7 @@ class Profile extends React.Component {
           <Link
             className="nav-link active"
             to={`@${this.props.profile.username}`}>
-            My Articles
+            My nonoGrids
           </Link>
         </li>
 
@@ -95,7 +95,7 @@ class Profile extends React.Component {
           <Link
             className="nav-link"
             to={`@${this.props.profile.username}/favorites`}>
-            Favorited Articles
+            Favorited nonoGrids
           </Link>
         </li>
       </ul>
@@ -138,7 +138,7 @@ class Profile extends React.Component {
 
         <div className="container">
           <div className="row">
-
+<p> here in profile</p>
             <div className="col-xs-12 col-md-10 offset-md-1">
 
               <div className="articles-toggle">

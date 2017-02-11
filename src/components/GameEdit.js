@@ -152,7 +152,7 @@ class GameEdit extends React.Component {
   // }
 
 
-// componentDidMount() {
+// componentWillMount() {
 //   alert('didmount' + ' ' + this.state.editGridSet + ' ' + this.props.editGrid)
 //   if (this.props.editGrid === 'edit' && this.state.editGridSet) {
 //     this.setState({

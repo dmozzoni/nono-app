@@ -10,7 +10,7 @@ const Banner = ({ appName, token }) => {
         <h1 className="logo-font">
           {appName.toLowerCase()}
         </h1>
-        <p>A place to share and play NonoGrids.</p>
+        <p>A place to share and play nonoGrids.</p>
       </div>
     </div>
   );
