@@ -16,22 +16,32 @@ function Square(props) {
 
 
 function HeadRow(props) {
+  const divStyle = {
+    "width": (30*props.width).toString()+'px'
+  };
   return (
-    <button className="headRow" >
+    <button style={divStyle} className="headRow" >
       {props.value.replace(/,/g,' ')}
     </button>
   );
 }
 function HeadCol(props) {
+  const divStyle = {
+    "height": (30*props.height).toString()+'px'
+  };
   return (
-    <button className="headCol" >
+    <button style={divStyle} className="headCol" >
       <p className='rottxt'>{props.value.replace(/,/g,' ')}</p>
     </button>
   );
 }
 function HeadBlock(props) {
+  const divStyle = {
+    "height": (30*props.height).toString()+'px',
+    "width": (30*props.width).toString()+'px'
+  };
   return (
-    <button className="headBlock" >
+    <button style={divStyle} className="headBlock" >
     </button>
   );
 }
@@ -47,31 +57,26 @@ class Board extends React.Component {
       />
   }
   renderHeadRow(j,i) {
-    // const squares = this.props.squares;
-    return <HeadRow key={j.toString()} value={i.toString()} />;
+    return <HeadRow width={this.props.solRowMax} key={j.toString()} value={i.toString()} />;
   }
   renderHeadCol(j,i) {
-    // const squares = this.props.squares;
-    console.log(i);
-    // if (i.length > 1) console.log(i.split(',').join(' '));
-
-    return <HeadCol key={j.toString()} value={i.toString()} />;
+    return <HeadCol height={this.props.solColMax} key={j.toString()} value={i.toString()} />;
   }
   renderHeadBlock(i) {
-    // const squares = this.props.squares;
-    return <HeadBlock value={i} />;
+    return <HeadBlock width={this.props.solRowMax} height={this.props.solColMax} value={i} />;
   }
   renderBoardRows() {
     let wid = this.props.solWidth;
+    let hgt = this.props.solHeight;
     let col = this.props.solCol;
     let row = this.props.solRow;
     let page = [];
 
-    for(let j =0; j<wid; j++) {
+    for(let j =0; j<hgt; j++) {
         page.push(
             <div key={j.toString()} className="board-row">
               {this.renderHeadRow(j,row[j])}
-              {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid*j); })}
+              {Array(wid).fill(0).map((e, i) => { return this.renderSquare(i+wid*j); })}
             </div>
           )
         }
@@ -87,7 +92,7 @@ class Board extends React.Component {
       <div>
         <div className="board-row">
           {this.renderHeadBlock(0)}
-          {Array(wid).join().split(',').map((e, i) => { return this.renderHeadCol(i,col[i]); })}
+          {Array(wid).fill(0).map((e, i) => { return this.renderHeadCol(i,col[i]); })}
         </div>
 
         {this.renderBoardRows()}
@@ -105,13 +110,13 @@ class Game extends React.Component {
         squares: Array(props.solutionWidth*props.solutionHeight).fill(null),
       }],
       stepNumber: 0,
-      xIsNext: true,
       sol:  props.solution,
       solWidth: props.solutionWidth,
       solHeight: props.solutionHeight,
       solCol: this.calcCols(props.solutionWidth,props.solutionHeight,props.solution),
-      solRow: this.calcRows(props.solutionWidth,props.solutionHeight,props.solution)
-      // solRow: [1,1,0,1,1,0,0,0,0,0]
+      solRow: this.calcRows(props.solutionWidth,props.solutionHeight,props.solution),
+      solColMax: Math.max(...this.calcCols(props.solutionWidth,props.solutionHeight,props.solution).map((i) => i.length).filter((i) => {return i!==undefined})),
+      solRowMax: Math.max(...this.calcRows(props.solutionWidth,props.solutionHeight,props.solution).map((i) => i.length).filter((i) => {return i!==undefined})),
     };
   }
 
@@ -187,7 +192,6 @@ class Game extends React.Component {
         squares: squares
       }]),
       stepNumber: history.length,
-      xIsNext: !this.state.xIsNext,
       test: true
     });
   }
@@ -276,8 +280,10 @@ class Game extends React.Component {
         <div>
 
           <Board key={'board'}
-            squares={current.squares} solWidth={this.state.solWidth}
+            squares={current.squares}
+            solWidth={this.state.solWidth} solHeight={this.state.solHeight}
             solCol={this.state.solCol} solRow={this.state.solRow}
+            solColMax={this.state.solColMax} solRowMax={this.state.solRowMax}
             onMouseDown={(e,i) => this.handleMouseDown(e,i)}
             onMouseUp={(e,i) => this.handleMouseUp(e,i)}
             onContextMenu={(e,i) => this.handleRightClick(e,i)}

@@ -79,7 +79,7 @@ ol, ul {
   background: #fff;
   border: 1px solid #999;
   float: left;
-  font-size: 18px;
+  font-size: 20px;
 /*   font-weight: bold; */
   line-height: 34px;
   height: 34px;
@@ -87,7 +87,8 @@ ol, ul {
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 68px;
+  /*width: 68px;*/
+  border-right: 3px solid #999;
 }
 
 
@@ -100,11 +101,12 @@ ol, ul {
 .headCol {
   background: #fff;
   border: 1px solid #999;
+  border-bottom: 3px solid #999;
   float: left;
-  font-size: 18px;
+  font-size: 20px;
 /*   font-weight: bold; */
   /*line-height: 34px;*/
-  height: 68px;
+  /*height: 68px;*/
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
@@ -119,12 +121,12 @@ ol, ul {
   font-size: 18px;
 /*   font-weight: bold; */
   line-height: 34px;
-  height: 68px;
+  /*height: 68px;*/
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 68px;
+  /*width: 68px;*/
 }
 
 

@@ -32,10 +32,12 @@ class Editor extends React.Component {
 
     const updateFieldEvent =
       key => ev => this.props.onUpdateField(key, ev.target.value);
-    this.changeTitle = updateFieldEvent('title');
-    this.changeDescription = updateFieldEvent('description');
-    this.changeBody = updateFieldEvent('body');
-    this.changeTagInput = updateFieldEvent('tagInput');
+      this.changeTitle = updateFieldEvent('title');
+      this.changesolutionHeight = updateFieldEvent('solutionHeight');
+      this.changesolutionWidth = updateFieldEvent('solutionWidth');
+      this.changeDescription = updateFieldEvent('description');
+      this.changeBody = updateFieldEvent('body');
+      this.changeTagInput = updateFieldEvent('tagInput');
 
     this.watchForEnter = ev => {
       if (ev.keyCode === 13) {
@@ -102,7 +104,6 @@ class Editor extends React.Component {
       editGrid = 'edit';
     }
 
-
     return (
       <div className="editor-page">
         <div className="container page">
@@ -123,6 +124,27 @@ class Editor extends React.Component {
                       value={this.props.title}
                       onChange={this.changeTitle} />
                   </fieldset>
+
+
+                  <fieldset className="form-group">
+                    <input
+                      className="form-control form-control-lg"
+                      type="number"
+                      placeholder="Width"
+                      min="5"
+                      max="20"
+                      value={this.props.solutionWidth}
+                      onChange={this.changesolutionWidth} />
+                      <input
+                        className="form-control form-control-lg"
+                        type="number"
+                        placeholder="Height"
+                        min="5"
+                        max="20"
+                        value={this.props.solutionHeight}
+                        onChange={this.changesolutionHeight} />
+                  </fieldset>
+
 
                   <fieldset className="form-group">
                     <GameEdit callbackParent={ (newState) => this.onChildChanged(newState) } 

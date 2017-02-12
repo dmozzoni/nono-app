@@ -24,15 +24,20 @@ class BoardEdit extends React.Component {
  />
   }
   renderBoardRows() {
-    let wid = this.props.solWidth;
+    let wid = Number(this.props.solWidth);
+    let hgt = Number(this.props.solHeight);
     let page = [];
 
-    for(let j =0; j<wid; j++) {
+    for(let j =0; j<hgt; j++) {
+      // console.log(wid,hgt,j);
         page.push(
             <div key={j.toString()} className="board-row">
-              {Array(wid).join().split(',').map((e, i) => { return this.renderSquare(i+wid*j); })}
+              {
+                Array(wid).fill(0).map((e, i) => { return this.renderSquare(i+wid*j); })
+              }
             </div>
           )
+          // console.log(page);
     }
     return page;
   }
@@ -55,7 +60,8 @@ class GameEdit extends React.Component {
       sol:  Array(100).fill(null),
       solWidth: 10,
       solHeight: 10,
-      editGridSet: true
+      editGridSet: true,
+      // size: 10
     };
   }
 
@@ -152,6 +158,42 @@ class GameEdit extends React.Component {
   // }
 
 
+  componentWillReceiveProps(nextProps) {
+    // alert('size ' + this.state.size + ' ' + nextProps.size + '\n'
+    // +  'solwidth ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n'
+    // +  'solheight ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n')
+    // if (nextProps.editGrid === 'edit' && this.state.editGridSet) {
+
+
+    // alert('size ' + this.state.solWidth + ' ' + nextProps.solutionWidth)
+if(nextProps.solutionWidth && nextProps.solutionHeight) {
+    if ( (Number(nextProps.solutionWidth) !== Number(this.state.solWidth)) ||
+         (Number(nextProps.solutionHeight) !== Number(this.state.solHeight)) )
+    {
+      //  alert('size ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n'
+      // +  'solheight ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n')
+          this.setState({
+            // sol: Array(Number(nextProps.solutionWidth)*Number(nextProps.solutionHeight)).fill(null)
+            sol: nextProps.solution.map( (i) => { return i ? "\u2B1B":null })
+
+          });
+    }
+
+      this.setState({
+        // size:  Number(nextProps.size),
+        solWidth: nextProps.solutionWidth,
+        solHeight: nextProps.solutionHeight,
+        // editGridSet: false
+      });
+
+
+}
+    // }
+  }
+
+
+
+
 // componentWillMount() {
 //   alert('didmount' + ' ' + this.state.editGridSet + ' ' + this.props.editGrid)
 //   if (this.props.editGrid === 'edit' && this.state.editGridSet) {
@@ -180,7 +222,7 @@ class GameEdit extends React.Component {
         <div>
           <BoardEdit key={'boardedit'}
             squares={this.state.sol}
-            solWidth={this.state.solWidth} solHeight={this.state.solHeight}
+            solWidth={this.props.solutionWidth} solHeight={this.props.solutionHeight}
             onMouseDown={(e,i) => this.handleMouseDown(e,i)}
             onMouseUp={(e,i) => this.handleMouseUp(e,i)}
             onContextMenu={(e,i) => this.handleRightClick(e,i)}
