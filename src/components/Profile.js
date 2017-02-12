@@ -129,12 +129,6 @@ class Profile extends React.Component {
                 <p>{profile.bio}</p>
 
                 <EditProfileSettings isUser={isUser} />
-                <FollowUserButton
-                  isUser={isUser}
-                  user={profile}
-                  follow={this.props.onFollow}
-                  unfollow={this.props.onUnfollow}
-                  />
 
               </div>
             </div>
@@ -143,7 +137,6 @@ class Profile extends React.Component {
 
         <div className="container">
           <div className="row">
-<p> here in profile</p>
             <div className="col-xs-12 col-md-10 offset-md-1">
 
               <div className="articles-toggle">

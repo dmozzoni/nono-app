@@ -187,6 +187,16 @@ class GameEdit extends React.Component {
                       });
                   }
 
+              } else {
+                if (nextProps.editGrid === 'edit') {
+                  this.setState({
+                      // sol: Array(Number(nextProps.solutionWidth)*Number(nextProps.solutionHeight)).fill(null)
+                      sol: nextProps.solution.map((i) => {
+                          return i ? "\u2B1B" : null
+                      })
+                  });
+                }
+
               }
 
               this.setState({

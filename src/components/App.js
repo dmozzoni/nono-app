@@ -11,11 +11,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+  onClickLogout: () => dispatch({ type: 'LOGOUT' }),
   onLoad: (payload, token) =>
     dispatch({ type: 'APP_LOAD', payload, token, skipTracking: true }),
   onRedirect: () =>
     dispatch({ type: 'REDIRECT' })
 });
+
 
 class App extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -40,6 +42,7 @@ class App extends React.Component {
         <div>
           <Header
             appName={this.props.appName}
+            onClickLogout={this.props.onClickLogout}
             currentUser={this.props.currentUser} />
           {this.props.children}
         </div>
@@ -49,6 +52,7 @@ class App extends React.Component {
       <div>
         <Header
           appName={this.props.appName}
+          onClickLogout={this.props.onClickLogout}
           currentUser={this.props.currentUser} />
       </div>
     );

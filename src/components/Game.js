@@ -153,6 +153,7 @@ class Game extends React.Component {
     var current = history[history.length - 1];
     const squares = current.squares.slice();
 
+// {['\u00b7','\u22C5','\u2022','\u2219','\u22C5']}
     var vals = [null, "\u2B1B", '\u00b7']; // null, square, dot
 
  // if (calculateWinner(squares) || squares[i]) {

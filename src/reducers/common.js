@@ -16,6 +16,7 @@ export default (state = defaultState, action) => {
     case 'REDIRECT':
       return { ...state, redirectTo: null };
     case 'LOGOUT':
+    console.log('logout');
       return { ...state, redirectTo: '/', token: null, currentUser: null };
     case 'ARTICLE_SUBMITTED':
       if(!action.error){

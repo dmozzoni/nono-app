@@ -149,7 +149,6 @@ const mapDispatchToProps = dispatch => ({
 
         <div className="container">
           <div className="row">
-<p> here in profilefav</p>
             <div className="col-xs-12 col-md-10 offset-md-1">
 
               <div className="articles-toggle">

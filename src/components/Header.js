@@ -1,24 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router';
-// import agent from '../agent';
-// import { connect } from 'react-redux';
-
-
-//
-// const mapStateToProps = state => ({
-//   ...state.settings,
-//   currentUser: state.common.currentUser
-// });
-//
-// const mapDispatchToProps = dispatch => ({
-//   onClickLogout: () => dispatch({ type: 'LOGOUT' }),
-//   onSubmitForm: user =>
-//     dispatch({ type: 'SETTINGS_SAVED', payload: agent.Auth.save(user) }),
-//   onUnload: () => dispatch({ type: 'SETTINGS_PAGE_UNLOADED' })
-// });
-//
-
-
 
 
 const LoggedOutView = props => {
@@ -74,6 +55,15 @@ const LoggedInView = props => {
         </li>
 
         <li className="nav-item">
+          <Link to="/" className="nav-link"
+            onClick={props.onClickLogout}>
+            <i className="ion-log-out"></i>&nbsp;Logout
+          </Link>
+          </li>
+
+
+
+        <li className="nav-item">
           <Link
             to={`@${props.currentUser.username}`}
             className="nav-link">
@@ -89,6 +79,7 @@ const LoggedInView = props => {
   return null;
 };
 
+
 class Header extends React.Component {
   render() {
     return (
@@ -101,7 +92,7 @@ class Header extends React.Component {
 
           <LoggedOutView currentUser={this.props.currentUser} />
 
-          <LoggedInView currentUser={this.props.currentUser} />
+          <LoggedInView onClickLogout={this.props.onClickLogout} currentUser={this.props.currentUser} />
         </div>
       </nav>
     );

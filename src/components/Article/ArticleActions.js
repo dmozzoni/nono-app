@@ -15,7 +15,7 @@ const ArticleActions = props => {
   };
   if (props.canModify) {
     return (
-      <span>
+      <span className="metaactionbuttons">
 
         <Link
           to={`/editor/${article.slug}`}
