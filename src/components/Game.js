@@ -8,7 +8,6 @@ function Square(props) {
                                onContextMenu={(e) => props.onContextMenu(e)}
                                onMouseEnter={(e) => props.onMouseEnter(e)}
                                onMouseOut={(e) => props.onMouseOut(e)}
-
     >
       {props.value}
     </div>

@@ -234,6 +234,8 @@ class GameEdit extends React.Component {
 
 // this.resetState();
     return (
+      <div className="container">
+
       <div className="game">
         <div>
           <BoardEdit key={'boardedit'}
@@ -246,7 +248,8 @@ class GameEdit extends React.Component {
             onMouseOut={(e,i) => this.handleMouseUp(e,i)}
           />
         </div>
-      </div>
+        </div>
+        </div>
     );
   }
 }

@@ -4,6 +4,37 @@ body {
   font-family: sans-serif;
 }
 
+.input-group-addon {
+
+width: 75px;
+padding-top: 16px;
+height: 51px;
+display: inline-block;
+}
+
+#formGroupWidth {
+  width: 100px;
+  /*display: inline;*/
+}
+#formGroupHeight {
+  width: 100px;
+  /*display: inline;*/
+}
+#foo {
+  width: 160px;
+  display: inline;
+}
+#foo2 {
+  width: 160px;
+  display: inline;
+  margin-left: 10px;
+}
+
+.lol {
+    /*margin: 0 auto;*/
+    text-align: center;
+}
+
 .pansize {
 
 width: 200px;

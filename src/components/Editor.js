@@ -127,15 +127,23 @@ class Editor extends React.Component {
 
 
                   <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="number"
-                      placeholder="Width"
-                      min="5"
-                      max="20"
-                      value={this.props.solutionWidth}
-                      onChange={this.changesolutionWidth} />
+                    <div id="foo" className="input-group form-inline">
+                      <div className="input-group-addon">Width</div>
                       <input
+                        id="formGroupWidth"
+                        className="form-control form-control-lg form-inline"
+                        type="number"
+                        placeholder="Width"
+                        min="5"
+                        max="20"
+                        value={this.props.solutionWidth}
+                        onChange={this.changesolutionWidth} />
+                    </div>
+
+                    <div id="foo2" className="input-group form-inline">
+                      <div className="input-group-addon">Height</div>
+                      <input
+                        id="formGroupHeight"
                         className="form-control form-control-lg"
                         type="number"
                         placeholder="Height"
@@ -143,10 +151,12 @@ class Editor extends React.Component {
                         max="20"
                         value={this.props.solutionHeight}
                         onChange={this.changesolutionHeight} />
+                    </div>
+
                   </fieldset>
 
 
-                  <fieldset className="form-group">
+                  <fieldset className="form-group lol">
                     <GameEdit callbackParent={ (newState) => this.onChildChanged(newState) } 
                               solution={this.props.solution} solutionWidth={this.props.solutionWidth}
                               solutionHeight={this.props.solutionHeight} editGrid={editGrid}
@@ -155,9 +165,9 @@ class Editor extends React.Component {
 
                   <fieldset className="form-group">
                     <input
-                      className="form-control"
+                      className="form-control form-control-lg"
                       type="text"
-                      placeholder="Breifly describe your nonoGrid?"
+                      placeholder="Briefly describe your nonoGrid?"
                       value={this.props.description}
                       onChange={this.changeDescription} />
                   </fieldset>
