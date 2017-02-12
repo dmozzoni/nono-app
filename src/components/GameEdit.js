@@ -159,36 +159,50 @@ class GameEdit extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-    // alert('size ' + this.state.size + ' ' + nextProps.size + '\n'
-    // +  'solwidth ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n'
-    // +  'solheight ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n')
-    // if (nextProps.editGrid === 'edit' && this.state.editGridSet) {
+          // alert('size ' + this.state.size + ' ' + nextProps.size + '\n'
+          // +  'solwidth ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n'
+          // +  'solheight ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n')
+          // if (nextProps.editGrid === 'edit' && this.state.editGridSet) {
 
 
-    // alert('size ' + this.state.solWidth + ' ' + nextProps.solutionWidth)
-if(nextProps.solutionWidth && nextProps.solutionHeight) {
-    if ( (Number(nextProps.solutionWidth) !== Number(this.state.solWidth)) ||
-         (Number(nextProps.solutionHeight) !== Number(this.state.solHeight)) )
-    {
-      //  alert('size ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n'
-      // +  'solheight ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n')
-          this.setState({
-            // sol: Array(Number(nextProps.solutionWidth)*Number(nextProps.solutionHeight)).fill(null)
-            sol: nextProps.solution.map( (i) => { return i ? "\u2B1B":null })
+          // alert('size ' + this.state.solWidth + ' ' + nextProps.solutionWidth)
+          if (nextProps.solutionWidth && nextProps.solutionHeight) {
+              if ((Number(nextProps.solutionWidth) !== Number(this.state.solWidth)) ||
+                  (Number(nextProps.solutionHeight) !== Number(this.state.solHeight))) {
+                  //  alert('solwidth ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n'
+                  // +  'solheight ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n')
+                  if (nextProps.editGrid === 'new') {
+                      this.setState({
+                          sol: Array(Number(nextProps.solutionWidth) * Number(nextProps.solutionHeight)).fill(null)
+                          // sol: nextProps.solution.map( (i) => { return i ? "\u2B1B":null })
+                      });
+                  } else {
+                      this.setState({
+                          // sol: Array(Number(nextProps.solutionWidth)*Number(nextProps.solutionHeight)).fill(null)
+                          sol: nextProps.solution.map((i) => {
+                              return i ? "\u2B1B" : null
+                          })
+                      });
+                  }
 
-          });
-    }
+              }
 
-      this.setState({
-        // size:  Number(nextProps.size),
-        solWidth: nextProps.solutionWidth,
-        solHeight: nextProps.solutionHeight,
-        // editGridSet: false
-      });
+              this.setState({
+                  // size:  Number(nextProps.size),
+                  solWidth: nextProps.solutionWidth,
+                  solHeight: nextProps.solutionHeight,
+                  // editGridSet: false
+              });
+          }
+          if (this.state.sol.length === 0) {
+            this.setState({
+                sol: Array(100).fill(null)
+                // sol: nextProps.solution.map( (i) => { return i ? "\u2B1B":null })
+            });
+
+          }
 
 
-}
-    // }
   }
 
 
