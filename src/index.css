@@ -4,6 +4,16 @@ body {
   font-family: sans-serif;
 }
 
+.pansize {
+
+width: 200px;
+
+}
+
+.panli {
+  padding-left: 40px;
+  padding-right: 0;
+}
 
 .panscroll {
   min-height: 345px;
@@ -22,6 +32,9 @@ body {
 .list-group-item {
   padding-bottom: 5px;
   padding-top: 5px;
+
+  /*width: 125px; */
+  margin-left: 0px;
 }
 
 .alert {
@@ -68,12 +81,6 @@ ol, ul {
   border-right: 2px solid red;
   border-left: 1px solid red;
 }
-
-.vertical-text {
-	transform: rotate(270deg);
-	transform-origin: left top 0;
-}
-
 
 .headRow {
   background: #fff;

@@ -7,6 +7,7 @@ function Square(props) {
                                onMouseUp={(e) => props.onMouseUp(e)}
                                onContextMenu={(e) =>props.onContextMenu(e)}
                                onMouseEnter={(e) =>props.onMouseEnter(e)}
+                               onMouseOut={(e) => props.onMouseOut(e)}
     >
       {props.value}
     </div>
@@ -21,6 +22,7 @@ class BoardEdit extends React.Component {
                    onMouseUp={(e) => this.props.onMouseUp(e)}
                    onContextMenu={(e) => this.props.onContextMenu(e,i)}
                    onMouseEnter={(e) => this.props.onMouseEnter(e,i)}
+                   onMouseOut={(e) => this.props.onMouseOut(e,i)}
  />
   }
   renderBoardRows() {
@@ -241,6 +243,7 @@ class GameEdit extends React.Component {
             onMouseUp={(e,i) => this.handleMouseUp(e,i)}
             onContextMenu={(e,i) => this.handleRightClick(e,i)}
             onMouseEnter={(e,i) => this.handleMouseEnter(e,i)}
+            onMouseOut={(e,i) => this.handleMouseUp(e,i)}
           />
         </div>
       </div>

@@ -5,8 +5,10 @@ function Square(props) {
   return (
     <div className="square"    onMouseDown={(e) => props.onMouseDown(e)}
                                onMouseUp={(e) => props.onMouseUp(e)}
-                               onContextMenu={(e) =>props.onContextMenu(e)}
-                               onMouseEnter={(e) =>props.onMouseEnter(e)}
+                               onContextMenu={(e) => props.onContextMenu(e)}
+                               onMouseEnter={(e) => props.onMouseEnter(e)}
+                               onMouseOut={(e) => props.onMouseOut(e)}
+
     >
       {props.value}
     </div>
@@ -54,6 +56,7 @@ class Board extends React.Component {
                         onMouseUp={(e) => this.props.onMouseUp(e)}
                         onContextMenu={(e) => this.props.onContextMenu(e,i)}
                         onMouseEnter={(e) => this.props.onMouseEnter(e,i)}
+                        onMouseOut={(e) => this.props.onMouseOut(e,i)}
       />
   }
   renderHeadRow(j,i) {
@@ -288,13 +291,14 @@ class Game extends React.Component {
             onMouseUp={(e,i) => this.handleMouseUp(e,i)}
             onContextMenu={(e,i) => this.handleRightClick(e,i)}
             onMouseEnter={(e,i) => this.handleMouseEnter(e,i)}
+            onMouseOut={(e,i) => this.handleMouseUp(e,i)}
           />
 
         </div>
-        <div className="panel panel-primary">
+        <div className="panel panel-primary pansize">
           <div className="panel-heading panscrollheader">Undo List</div>
           <div className="panel-body panscroll">
-            <ol>{moves.reverse()}</ol>
+            <ol className="panli">{moves.reverse()}</ol>
           </div>
         </div>
       </div>
