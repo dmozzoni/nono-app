@@ -70,7 +70,7 @@ class Board extends React.Component {
   renderBoardRows() {
     let wid = this.props.solWidth;
     let hgt = this.props.solHeight;
-    let col = this.props.solCol;
+    // let col = this.props.solCol;
     let row = this.props.solRow;
     let page = [];
 
@@ -89,7 +89,7 @@ class Board extends React.Component {
   render() {
     let wid = this.props.solWidth;
     let col = this.props.solCol;
-    let row = this.props.solRow;
+    // let row = this.props.solRow;
     return (
       <div>
         <div className="board-row">
@@ -279,7 +279,7 @@ class Game extends React.Component {
       <div className="container">
         {showalert}
         <div className="row">
-      <div className="game">
+      <div className="game gameboard">
         <div>
 
           <Board key={'board'}

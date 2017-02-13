@@ -6,11 +6,6 @@ export default (state = {}, action) => {
       };
     case 'PROFILE_PAGE_UNLOADED':
       return {};
-    case 'FOLLOW_USER':
-    case 'UNFOLLOW_USER':
-      return {
-        ...action.payload.profile
-      };
     default:
   }
 

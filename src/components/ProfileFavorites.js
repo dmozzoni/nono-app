@@ -17,56 +17,12 @@ const EditProfileSettings = props => {
   return null;
 };
 
-const FollowUserButton = props => {
-  if (props.isUser) {
-    return null;
-  }
-
-  let classes = 'btn btn-sm action-btn';
-  if (props.user.following) {
-    classes += ' btn-secondary';
-  } else {
-    classes += ' btn-outline-secondary';
-  }
-
-  const handleClick = ev => {
-    ev.preventDefault();
-    if (props.user.following) {
-      props.unfollow(props.user.username)
-    } else {
-      props.follow(props.user.username)
-    }
-  };
-
-  return (
-    <button
-      className={classes}
-      onClick={handleClick}>
-      <i className="ion-plus-round"></i>
-      &nbsp;
-      {props.user.following ? 'Unfollow' : 'Follow'} {props.user.username}
-    </button>
-  );
-};
 
 const mapStateToProps = state => ({
   ...state.articleList,
   currentUser: state.common.currentUser,
   profile: state.profile
 });
-
-// const mapDispatchToProps = dispatch => ({
-//   onFollow: username => dispatch({
-//     type: 'FOLLOW_USER',
-//     payload: agent.Profile.follow(username)
-//   }),
-//   onLoad: payload => dispatch({ type: 'PROFILE_PAGE_LOADED', payload }),
-//   onUnfollow: username => dispatch({
-//     type: 'UNFOLLOW_USER',
-//     payload: agent.Profile.unfollow(username)
-//   }),
-//   onUnload: () => dispatch({ type: 'PROFILE_PAGE_UNLOADED' })
-// });
 
 
 const mapDispatchToProps = dispatch => ({
@@ -79,7 +35,6 @@ const mapDispatchToProps = dispatch => ({
 // class Profile extends React.Component {
   class ProfileFavorites extends React.Component {
     componentWillMount() {
-      console.log(this.props);
       this.props.onLoad(Promise.all([
         agent.Profile.get(this.props.params.username),
         agent.Articles.favoritedBy(this.props.params.username)
@@ -135,12 +90,6 @@ const mapDispatchToProps = dispatch => ({
                 <p>{profile.bio}</p>
 
                 <EditProfileSettings isUser={isUser} />
-                <FollowUserButton
-                  isUser={isUser}
-                  user={profile}
-                  follow={this.props.onFollow}
-                  unfollow={this.props.onUnfollow}
-                  />
 
               </div>
             </div>
