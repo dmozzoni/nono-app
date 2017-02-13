@@ -14,3 +14,5 @@ Based off:
 https://github.com/GoThinkster/react-redux-realworld-example-app
 https://github.com/gothinkster/node-express-realworld-example-app
 https://facebook.github.io/react/tutorial/tutorial.html
+
+Three models
