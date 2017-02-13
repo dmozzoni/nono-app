@@ -125,7 +125,6 @@ class Editor extends React.Component {
                       onChange={this.changeTitle} />
                   </fieldset>
 
-
                   <fieldset className="form-group">
                     <div id="foo" className="input-group form-inline">
                       <div className="input-group-addon">Width</div>
@@ -154,7 +153,6 @@ class Editor extends React.Component {
                     </div>
 
                   </fieldset>
-
 
                   <fieldset className="form-group lol">
                     <GameEdit callbackParent={ (newState) => this.onChildChanged(newState) } 

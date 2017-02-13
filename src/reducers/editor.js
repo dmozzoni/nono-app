@@ -5,7 +5,6 @@ export default (state = {}, action) => {
         ...state,
         articleSlug: action.payload ? action.payload.article.slug : '',
         title: action.payload ? action.payload.article.title : '',
-        // size: action.payload ? action.payload.article.size : 10,
         description: action.payload ? action.payload.article.description : '',
         body: action.payload ? action.payload.article.body : '',
         tagInput: '',

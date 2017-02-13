@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-
 const LoggedOutView = props => {
   if (!props.currentUser) {
     return (
@@ -61,8 +60,6 @@ const LoggedInView = props => {
           </Link>
           </li>
 
-
-
         <li className="nav-item">
           <Link
             to={`@${props.currentUser.username}`}
@@ -91,8 +88,8 @@ class Header extends React.Component {
           </Link>
 
           <LoggedOutView currentUser={this.props.currentUser} />
-
           <LoggedInView onClickLogout={this.props.onClickLogout} currentUser={this.props.currentUser} />
+
         </div>
       </nav>
     );
@@ -100,4 +97,3 @@ class Header extends React.Component {
 }
 
 export default Header;
-// export default connect(mapStateToProps, mapDispatchToProps)(Header);

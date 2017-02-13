@@ -52,7 +52,6 @@ class BoardEdit extends React.Component {
 }
 
 
-
 class GameEdit extends React.Component {
   constructor(props) {
     super(props);
@@ -108,93 +107,56 @@ class GameEdit extends React.Component {
 
 
   componentWillReceiveProps(nextProps) {
-          // alert('size ' + this.state.size + ' ' + nextProps.size + '\n'
-          // +  'solwidth ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n'
-          // +  'solheight ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n')
-          // if (nextProps.editGrid === 'edit' && this.state.editGridSet) {
+      if (nextProps.solutionWidth && nextProps.solutionHeight) {
+          if ((Number(nextProps.solutionWidth) !== Number(this.state.solWidth)) ||
+              (Number(nextProps.solutionHeight) !== Number(this.state.solHeight))) {
 
+              if (nextProps.editGrid === 'new') {
+                  this.setState({
+                      sol: Array(Number(nextProps.solutionWidth) * Number(nextProps.solutionHeight)).fill(null)
+                  });
+              } else {
 
-          // alert('size ' + this.state.solWidth + ' ' + nextProps.solutionWidth)
-          if (nextProps.solutionWidth && nextProps.solutionHeight) {
-              if ((Number(nextProps.solutionWidth) !== Number(this.state.solWidth)) ||
-                  (Number(nextProps.solutionHeight) !== Number(this.state.solHeight))) {
-                  // alert('solwidth ' + this.state.solWidth + ' ' + nextProps.solutionWidth + '\n' +
-                  //     'solheight ' + this.state.solHeight + ' ' + nextProps.solutionHeight + '\n')
-
-                  if (nextProps.editGrid === 'new') {
+                  if (this.state.editGridSet) {
                       this.setState({
                           sol: Array(Number(nextProps.solutionWidth) * Number(nextProps.solutionHeight)).fill(null)
-                          // sol: nextProps.solution.map( (i) => { return i ? "\u2B1B":null })
                       });
+
                   } else {
-
-
-
-
-
-
-if (this.state.editGridSet) {
-  this.setState({
-       sol: Array(Number(nextProps.solutionWidth)*Number(nextProps.solutionHeight)).fill(null)
-      // sol: nextProps.solution.map((i) => { return i ? "\u2B1B" : null })
-  });
-
-} else {
-  this.setState({
-      // sol: Array(Number(nextProps.solutionWidth)*Number(nextProps.solutionHeight)).fill(null)
-      sol: nextProps.solution.map((i) => { return i ? "\u2B1B" : null }),
-      editGridSet: true
-  });
-
-}
-
-
-
-
-
-
-
-
-
-
-
-                  }
-
-              } else {
-                  if (nextProps.editGrid === 'edit') {
                       this.setState({
-                          // sol: Array(Number(nextProps.solutionWidth)*Number(nextProps.solutionHeight)).fill(null)
-                          sol: nextProps.solution.map((i) => { return i ? "\u2B1B" : null })
+                          sol: nextProps.solution.map((i) => {
+                              return i ? "\u2B1B" : null
+                          }),
+                          editGridSet: true
                       });
+
                   }
               }
 
-              this.setState({
-                  solWidth: nextProps.solutionWidth,
-                  solHeight: nextProps.solutionHeight,
-                  // editGridSet: false
-              });
+          } else {
+              if (nextProps.editGrid === 'edit') {
+                  this.setState({
+                      sol: nextProps.solution.map((i) => {
+                          return i ? "\u2B1B" : null
+                      })
+                  });
+              }
           }
 
+          this.setState({
+              solWidth: nextProps.solutionWidth,
+              solHeight: nextProps.solutionHeight,
+          });
+      }
 
+      if (this.state.sol.length === 0) {
+          this.setState({
+              sol: Array(100).fill(null)
+          });
 
-
-
-
-
-
-
-          if (this.state.sol.length === 0) {
-            this.setState({
-                sol: Array(100).fill(null)
-                // sol: nextProps.solution.map( (i) => { return i ? "\u2B1B":null })
-            });
-
-          }
-
+      }
 
   }
-
   render() {
     return (
       <div className="container">
@@ -216,6 +178,5 @@ if (this.state.editGridSet) {
     );
   }
 }
-
 
 export default GameEdit;

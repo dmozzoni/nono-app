@@ -32,7 +32,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: 'PROFILE_FAVORITES_PAGE_UNLOADED' })
 });
 
-// class Profile extends React.Component {
   class ProfileFavorites extends React.Component {
     componentWillMount() {
       this.props.onLoad(Promise.all([
@@ -119,5 +118,4 @@ const mapDispatchToProps = dispatch => ({
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileFavorites);
-// export { Profile as Profile, mapStateToProps as mapStateToProps };
 export { ProfileFavorites, mapStateToProps };

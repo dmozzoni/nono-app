@@ -24,7 +24,6 @@ class Login extends React.Component {
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
     this.submitForm = (email, password) => ev => {
       ev.preventDefault();
-      // this.props.onSubmit(email, password);
       this.props.onSubmit(email, password);
     };
   }

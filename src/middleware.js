@@ -9,9 +9,9 @@ const promiseMiddleware = store => next => action => {
 
     action.payload.then(
       res => {
-        const currentState = store.getState()
+        const currentState = store.getState();
         if (!skipTracking && currentState.viewChangeCounter !== currentView) {
-          return
+          return;
         }
         // console.log('RESULT', res);
         action.payload = res;
@@ -19,9 +19,9 @@ const promiseMiddleware = store => next => action => {
         store.dispatch(action);
       },
       error => {
-        const currentState = store.getState()
+        const currentState = store.getState();
         if (!skipTracking && currentState.viewChangeCounter !== currentView) {
-          return
+          return;
         }
         console.log('ERROR', error);
         action.error = true;
@@ -57,5 +57,4 @@ function isPromise(v) {
   return v && typeof v.then === 'function';
 }
 
-
-export { promiseMiddleware, localStorageMiddleware }
+export { promiseMiddleware, localStorageMiddleware };

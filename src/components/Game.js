@@ -14,8 +14,6 @@ function Square(props) {
   );
 }
 
-
-
 function HeadRow(props) {
   const divStyle = {
     "width": (30*props.width).toString()+'px'
@@ -70,7 +68,6 @@ class Board extends React.Component {
   renderBoardRows() {
     let wid = this.props.solWidth;
     let hgt = this.props.solHeight;
-    // let col = this.props.solCol;
     let row = this.props.solRow;
     let page = [];
 
@@ -122,30 +119,23 @@ class Game extends React.Component {
     };
   }
 
-
   handleMouseEnter(e,i) {
     e.preventDefault();
     if(this.state.test) {
-      // console.log('enter and down');
       this.handleMouseDown(e,i);
-    }else{
-      // console.log('enter');
     }
   }
+
   handleMouseUp(e,i) {
     e.preventDefault();
     this.setState({
         test: false
     });
-    // console.log('mouse up');
   }
 
   handleRightClick(e,i) {
     e.preventDefault();
-    // console.log('mouse right');
   }
-
-
 
   handleMouseDown(e,i) {
     e.preventDefault();
@@ -156,8 +146,7 @@ class Game extends React.Component {
 // {['\u00b7','\u22C5','\u2022','\u2219','\u22C5']}
     var vals = [null, "\u2B1B", '\u00b7']; // null, square, dot
 
- // if (calculateWinner(squares) || squares[i]) {
-    if (calculateWinner(squares, this.state.sol)) {
+     if (calculateWinner(squares, this.state.sol)) {
       return;
     }
 
@@ -312,16 +301,11 @@ class Game extends React.Component {
 
 function calculateWinner(squares, sol) {
 
-  // console.log(sol);
-  // console.log(squares);
-
   for (var i=0; i<sol.length; i++) {
     if ((sol[i] === 1 && squares[i] !== '\u2B1B') || (sol[i] === 0 && !(squares[i] === null || squares[i] === '\u00b7'))) {
-      // console.log('mismatch at', i);
       return null;
     }
   }
-  // console.log('Win');
   return 'Win';
 }
 

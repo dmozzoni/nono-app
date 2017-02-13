@@ -1,5 +1,4 @@
 import { applyMiddleware, createStore } from 'redux';
-// import createLogger from 'redux-logger'
 import { promiseMiddleware, localStorageMiddleware } from './middleware';
 import reducer from './reducer';
 
