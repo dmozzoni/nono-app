@@ -86,7 +86,7 @@ if (props.token) {
   return (
     <div className="container">
 
-      <img src="188.jpg" alt="Welcome" width="300" />
+      <img src="home_animated.gif" alt="Welcome" width="300" />
 
     </div>
   );
