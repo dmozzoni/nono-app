@@ -4,7 +4,14 @@ import _superagent from 'superagent';
 const superagent = superagentPromise(_superagent, global.Promise);
 
 // const API_ROOT = 'https://conduit.productionready.io/api';
+
+console.log(process.env.NONO_BACK);
+
 const API_ROOT = process.env.NONO_BACK || 'http://localhost:3001/api';
+
+
+console.log(process.env.NONO_BACK, API_ROOT);
+
 
 const encode = encodeURIComponent;
 const responseBody = res => res.body;
