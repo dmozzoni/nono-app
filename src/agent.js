@@ -5,6 +5,20 @@ const superagent = superagentPromise(_superagent, global.Promise);
 
 // const API_ROOT = 'https://conduit.productionready.io/api';
 
+
+const config = {
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env':{
+        'NONO_BACK': process.env.NONO_BACK,
+        'NONO': process.env.NONO
+      }
+    })
+  ],
+};
+
+
+
 console.log(process.env.NONO_BACK);
 
 const API_ROOT = process.env.NONO_BACK || 'http://localhost:3001/api';
