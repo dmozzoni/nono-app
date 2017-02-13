@@ -13,8 +13,7 @@ const API_ROOT = process.env.NONO_BACK || 'http://localhost:3001/api';
 console.log(process.env.NONO_BACK, API_ROOT, process.env.NODE_ENV, process.env.NONO);
 console.log(process.env);
 
-console.log(`${NONO_BACK}`);
-console.log(`${NONO}`);
+console.log(global.config);
 
 
 const encode = encodeURIComponent;
