@@ -49,7 +49,7 @@ const Articles = {
   all: page =>
     requests.get(`/articles?${limit(10, page)}`),
   byAuthor: (author, page) =>
-    requests.get(`/articles?author=${encode(author)}&${limit(5, page)}`),
+    requests.get(`/articles?author=${encode(author)}&${limit(10, page)}`),
   byTag: (tag, page) =>
     requests.get(`/articles?tag=${encode(tag)}&${limit(10, page)}`),
   del: slug =>
@@ -57,7 +57,7 @@ const Articles = {
   favorite: slug =>
     requests.post(`/articles/${slug}/favorite`),
   favoritedBy: (author, page) =>
-    requests.get(`/articles?favorited=${encode(author)}&${limit(5, page)}`),
+    requests.get(`/articles?favorited=${encode(author)}&${limit(10, page)}`),
   get: slug =>
     requests.get(`/articles/${slug}`),
   unfavorite: slug =>

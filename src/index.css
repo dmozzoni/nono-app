@@ -221,3 +221,7 @@ ol, ul {
 .game-info {
     margin-left: 20px;
 }
+
+.headCol, .headRow {
+  background-color: #eee;
+}

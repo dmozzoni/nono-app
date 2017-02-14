@@ -86,7 +86,6 @@ class Board extends React.Component {
   render() {
     let wid = this.props.solWidth;
     let col = this.props.solCol;
-    // let row = this.props.solRow;
     return (
       <div>
         <div className="board-row">
@@ -119,25 +118,25 @@ class Game extends React.Component {
     };
   }
 
-  handleMouseEnter(e,i) {
+  handleMouseEnter = (e,i) => {
     e.preventDefault();
     if(this.state.test) {
       this.handleMouseDown(e,i);
     }
   }
 
-  handleMouseUp(e,i) {
+  handleMouseUp = (e,i) => {
     e.preventDefault();
     this.setState({
         test: false
     });
   }
 
-  handleRightClick(e,i) {
+  handleRightClick = (e,i) => {
     e.preventDefault();
   }
 
-  handleMouseDown(e,i) {
+  handleMouseDown = (e,i) => {
     e.preventDefault();
     var history = this.state.history.slice(0, this.state.stepNumber + 1);
     var current = history[history.length - 1];
@@ -276,11 +275,11 @@ class Game extends React.Component {
             solWidth={this.state.solWidth} solHeight={this.state.solHeight}
             solCol={this.state.solCol} solRow={this.state.solRow}
             solColMax={this.state.solColMax} solRowMax={this.state.solRowMax}
-            onMouseDown={(e,i) => this.handleMouseDown(e,i)}
-            onMouseUp={(e,i) => this.handleMouseUp(e,i)}
-            onContextMenu={(e,i) => this.handleRightClick(e,i)}
-            onMouseEnter={(e,i) => this.handleMouseEnter(e,i)}
-            onMouseOut={(e,i) => this.handleMouseUp(e,i)}
+            onMouseDown={this.handleMouseDown}
+            onMouseUp={this.handleMouseUp}
+            onContextMenu={this.handleRightClick}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseOut={this.handleMouseUp}
           />
 
         </div>

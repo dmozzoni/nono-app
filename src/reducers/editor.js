@@ -39,6 +39,11 @@ export default (state = {}, action) => {
         tagList: state.tagList.filter(tag => tag !== action.tag)
       };
       case 'UPDATE_FIELD_EDITOR':
+        if (action.key==='solutionWidth' && (Number(action.value) > 20)) action.value = 20;
+        if (action.key==='solutionWidth' && (Number(action.value) < 5)) action.value = 5;
+        if (action.key==='solutionHeight' && (Number(action.value) > 20)) action.value = 20;
+        if (action.key==='solutionHeight' && (Number(action.value) < 5)) action.value = 5;
+
         return { ...state, [action.key]: action.value };
       case 'SOLUTION_UPDATE':
         return { ...state, solution: action.sol };
