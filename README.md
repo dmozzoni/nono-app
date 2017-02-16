@@ -11,12 +11,12 @@ https://en.wikipedia.org/wiki/Nonogram
 
 ## User Stories
 
-- User is present with a welcome page
+- User is presented with a welcome page
 - User can sign-up or sign-in
-- Onced signed-in a user can select a nonoGrid puzzle
-- User can use mouse to click on a square to cycle through filled-in, empty, unknown
-- Right click cycles opposite direction
-- User can hold and move to change state of square other squares.
+- Onced signed-in a user can select a nonoGrid puzzle to play
+- User can use mouse to click on a square to cycle through filled-in, empty, unknown states
+- Right click cycles in opposite direction
+- User can hold and move to change state of multiple squares.
 - ...
 
 
