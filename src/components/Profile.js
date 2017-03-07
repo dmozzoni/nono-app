@@ -29,7 +29,7 @@ const mapDispatchToProps = dispatch => ({
 
 // I have no idea why this solved the tab switching problem of losing the profile object
 // as they do the exact same thing and both dispatches should exist
-  // onUnload: () => dispatch({ type: 'PROFILE_PAGE_UNLOADED' })
+// onUnload: () => dispatch({ type: 'PROFILE_PAGE_UNLOADED' })
   onUnload: () => dispatch({ type: 'PROFILE_FAVORITES_PAGE_UNLOADED' })
 });
 

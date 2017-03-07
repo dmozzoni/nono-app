@@ -97,12 +97,7 @@ class Editor extends React.Component {
 
   render() {
 
-    let editGrid;
-    if (this.props.location.pathname === '/editor') {
-      editGrid = 'new';
-    } else {
-      editGrid = 'edit';
-    }
+    let editGrid = (this.props.location.pathname === '/editor') ? 'new' : 'edit';
 
     return (
       <div className="editor-page">

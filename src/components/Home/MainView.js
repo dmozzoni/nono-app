@@ -35,9 +35,9 @@ const MainView = props => {
 if (props.token) {
   return (
     <div className="container col-md-10">
-          <ul className="nav nav-pills outline-active">
-            <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
-          </ul>
+        <ul className="nav nav-pills outline-active">
+          <GlobalFeedTab tab={props.tab} onTabClick={props.onTabClick} />
+        </ul>
 
         <ArticleList
           articles={props.articles}
@@ -50,14 +50,11 @@ if (props.token) {
 
   return (
     <div className="container">
-
       <img src="home_animated.gif" alt="Welcome" width="300" />
-
     </div>
   );
 }
 
 };
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainView);

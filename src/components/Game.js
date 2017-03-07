@@ -8,7 +8,7 @@ function Square(props) {
                                onContextMenu={(e) => props.onContextMenu(e)}
                                onMouseEnter={(e) => props.onMouseEnter(e)}
                                onMouseOut={(e) => props.onMouseOut(e)}
-    >
+                               >
       {props.value}
     </div>
   );
@@ -54,7 +54,7 @@ class Board extends React.Component {
                         onContextMenu={(e) => this.props.onContextMenu(e,i)}
                         onMouseEnter={(e) => this.props.onMouseEnter(e,i)}
                         onMouseOut={(e) => this.props.onMouseOut(e,i)}
-      />
+                        />
   }
   renderHeadRow(j,i) {
     return <HeadRow width={this.props.solRowMax} key={j.toString()} value={i.toString()} />;
@@ -118,74 +118,75 @@ class Game extends React.Component {
     };
   }
 
-  handleMouseEnter = (e,i) => {
-    e.preventDefault();
-    if(this.state.test) {
-      this.handleMouseDown(e,i);
-    }
+  handleMouseEnter = (e, i) => {
+      e.preventDefault();
+      if (this.state.test) {
+          this.handleMouseDown(e, i);
+      }
   }
 
-  handleMouseUp = (e,i) => {
-    e.preventDefault();
-    this.setState({
-        test: false
-    });
+  handleMouseUp = (e, i) => {
+      e.preventDefault();
+      this.setState({
+          test: false
+      });
   }
 
   handleRightClick = (e,i) => {
     e.preventDefault();
   }
 
-  handleMouseDown = (e,i) => {
-    e.preventDefault();
-    var history = this.state.history.slice(0, this.state.stepNumber + 1);
-    var current = history[history.length - 1];
-    const squares = current.squares.slice();
+  handleMouseDown = (e, i) => {
+      e.preventDefault();
+      var history = this.state.history.slice(0, this.state.stepNumber + 1);
+      var current = history[history.length - 1];
+      const squares = current.squares.slice();
 
-// {['\u00b7','\u22C5','\u2022','\u2219','\u22C5']}
-    var vals = [null, "\u2B1B", '\u00b7']; // null, square, dot
+      // {['\u00b7','\u22C5','\u2022','\u2219','\u22C5']}
+      var vals = [null, "\u2B1B", '\u00b7']; // null, square, dot
 
-     if (calculateWinner(squares, this.state.sol)) {
-      return;
-    }
+      if (calculateWinner(squares, this.state.sol)) {
+          return;
+      }
 
-// e.nativeEvent.witch --> Left click === 1, Right click === 3
-    if(e.nativeEvent.which === 1) {
-      switch (squares[i]) {
-    case vals[0]:
-        squares[i] = vals[1];
-          break;
-    case vals[1]:
-        squares[i] = vals[2];
-          break;
-    case vals[2]:
-        squares[i] = vals[0];
-          break;
-    default:
-  }
-} else if (e.nativeEvent.which === 3) {
+      // e.nativeEvent.witch --> Left click === 1, Right click === 3
+      if (e.nativeEvent.which === 1) {
           switch (squares[i]) {
-    case vals[0]:
-        squares[i] = vals[2];
-          break;
-    case vals[1]:
-        squares[i] = vals[0];
-          break;
-    case vals[2]:
-        squares[i] = vals[1];
-          break;
-    default:
-  }
+              case vals[0]:
+                  squares[i] = vals[1];
+                  break;
+              case vals[1]:
+                  squares[i] = vals[2];
+                  break;
+              case vals[2]:
+                  squares[i] = vals[0];
+                  break;
+              default:
+          }
+      } else if (e.nativeEvent.which === 3) {
+          switch (squares[i]) {
+              case vals[0]:
+                  squares[i] = vals[2];
+                  break;
+              case vals[1]:
+                  squares[i] = vals[0];
+                  break;
+              case vals[2]:
+                  squares[i] = vals[1];
+                  break;
+              default:
+          }
+      }
+
+      this.setState({
+          history: history.concat([{
+              squares: squares
+          }]),
+          stepNumber: history.length,
+          test: true
+      });
   }
 
-    this.setState({
-      history: history.concat([{
-        squares: squares
-      }]),
-      stepNumber: history.length,
-      test: true
-    });
-  }
 
   jumpTo(step) {
     this.setState({
@@ -193,7 +194,6 @@ class Game extends React.Component {
       test: false
     });
   }
-
 
 
   calcCols(w,h,sol) {
@@ -208,7 +208,7 @@ class Game extends React.Component {
       if (tmp.length === 0) {
         a.push(0);
       } else {
-        a.push(  tmp  );
+        a.push( tmp );
       }
       col = [];
     }
@@ -227,11 +227,12 @@ class Game extends React.Component {
        if (tmp.length === 0) {
          a.push(0)
        } else {
-         a.push(  tmp  );
+         a.push( tmp );
        }
      }
     return a;
    }
+
 
    showalertbox(status) {
      return (<div className="alert alert-success" role="alert">{status}</div>);
@@ -242,7 +243,6 @@ class Game extends React.Component {
 
     const history = this.state.history;
     const current = history[this.state.stepNumber];
-
     const winner = calculateWinner(current.squares, this.state.sol);
 
     let status;
@@ -299,13 +299,12 @@ class Game extends React.Component {
 // ========================================
 
 function calculateWinner(squares, sol) {
-
-  for (var i=0; i<sol.length; i++) {
-    if ((sol[i] === 1 && squares[i] !== '\u2B1B') || (sol[i] === 0 && !(squares[i] === null || squares[i] === '\u00b7'))) {
-      return null;
+    for (var i = 0; i < sol.length; i++) {
+        if ((sol[i] === 1 && squares[i] !== '\u2B1B') || (sol[i] === 0 && !(squares[i] === null || squares[i] === '\u00b7'))) {
+            return null;
+        }
     }
-  }
-  return 'Win';
+    return 'Win';
 }
 
 export default Game

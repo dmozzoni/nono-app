@@ -8,7 +8,7 @@ function Square(props) {
                                onContextMenu={(e) =>props.onContextMenu(e)}
                                onMouseEnter={(e) =>props.onMouseEnter(e)}
                                onMouseOut={(e) => props.onMouseOut(e)}
-    >
+                               >
       {props.value}
     </div>
   );
@@ -23,7 +23,7 @@ class BoardEdit extends React.Component {
                    onContextMenu={(e) => this.props.onContextMenu(e,i)}
                    onMouseEnter={(e) => this.props.onMouseEnter(e,i)}
                    onMouseOut={(e) => this.props.onMouseOut(e,i)}
- />
+                   />
   }
   renderBoardRows() {
     let wid = Number(this.props.solWidth);
