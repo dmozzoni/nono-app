@@ -2,7 +2,7 @@
     "name": "nono-app",
     "version": "0.1.0",
     "engines": {
-        "node": "7.4.0",
+        "node": "7.10.1",
         "npm": "4.3.0"
     },
     "private": true,
